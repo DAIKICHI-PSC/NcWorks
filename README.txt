@@ -53,7 +53,7 @@ GUI_SIM.py            二次元シミュレーター用のGUIプログラム(Pyt
 GUI_SIM.ui            GUI作成用ファイル（QT Designer用）
 NcWorks.py            メインプログラム
 PLANET.ico            アイコンファイル
-README.txt            本ファイル
+README.txt            説明書
 SETTINGS_DXFtoNC.ini  CADCAM用の設定ファイル（本来は自動で生成されます）
 SETTINGS_EDITOR.ini   エディター用の設定ファイル（本来は自動で生成されます）
 SETTINGS_SIM.ini      二次元シミュレーター用の設定ファイル（本来は自動で生成されます）
