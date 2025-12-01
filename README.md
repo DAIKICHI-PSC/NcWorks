@@ -13,6 +13,7 @@ NC PROGRAM EDITOR, 2D SIMULATOR AND 2D CADCAM FOR SWISS-TYPE LATHE
 [Overview]  
 This program provides an editor, 2D simulator, and 2D CAD/CAM software for automatic lathes (Swiss-type lathes).  
 Visually creating and checking programs will contribute to significant time (cost) savings.  
+You can also output a DXF file from the NC program to visually check the program.  
 We created this program because commercially available CAD/CAM software is expensive and cannot simulate NC code.  
 It only supports the XZ plane.  
 Use it to standardize NC programs.  
@@ -69,6 +70,7 @@ Sub_NcTools.py Calculation module
 [概要]  
 本プログラムは、自動盤（スイス型旋盤）のエディター、二次元シミュレーター、二次元CADCAMを提供します。  
 視覚的にプログラムの作成、確認が出来るので、大幅な時間短縮（コスト削減）に貢献すると思います。  
+NCプログラムからDXFファイルを出力し、視覚的にプログラムを確認する事も出来ます。  
 一般的に購入できるCADCAMは高額で、NCコードからのシミュレーションが出来ないので、本プログラムを作成しました。  
 XZ平面のみに対応します。  
 NCプログラムの標準化に活用して下さい。  
