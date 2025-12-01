@@ -1,6 +1,9 @@
 # NcWorks
-NC PROGRAM EDITOR, 2D SIMULATOR AND 2D CADCAM FOR SWISS-TYPE LATHE
 
+---
+
+NC PROGRAM EDITOR, 2D SIMULATOR AND 2D CADCAM FOR SWISS-TYPE LATHE
+  
 [Overview]  
 This program provides an editor, 2D simulator, and 2D CAD/CAM software for automatic lathes (Swiss-type lathes).  
 Visually creating and checking programs will contribute to significant time (cost) savings.  
@@ -50,4 +53,6 @@ SETTINGS_EDITOR.ini Editor settings file (normally generated automatically)
 SETTINGS_SIM.ini 2D simulator settings file (normally generated automatically)  
 Sub_MathPlus.py Calculation module  
 Sub_NcTools.py Calculation module  
+
+---
 
