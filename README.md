@@ -113,7 +113,7 @@ NcWorks.py            メインプログラム
 NcWors.zip            圧縮された実行ファイル（ダウンロードして、本フォルダに解凍すれば即時に運用可能）  
 https://github.com/DAIKICHI-PSC/NcWorks/releases/download/V5.0.0/NcWorks.zip  
 PLANET.ico            アイコンファイル  
-README.txt            本ファイル  
+README.txt            説明書  
 SETTINGS_DXFtoNC.ini  CADCAM用の設定ファイル（本来は自動で生成されます）  
 SETTINGS_EDITOR.ini   エディター用の設定ファイル（本来は自動で生成されます）  
 SETTINGS_SIM.ini      二次元シミュレーター用の設定ファイル（本来は自動で生成されます）  
