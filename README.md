@@ -56,7 +56,7 @@ NcWorks.py: Main program
 NcWors.zip: Compressed executable file (download it, unzip it to this folder and you can start using it immediately)  
 https://github.com/DAIKICHI-PSC/NcWorks/releases/download/V5.0.0/NcWorks.zip  
 PLANET.ico: Icon file  
-README.txt: Main file  
+README.txt: Instructions  
 SETTINGS_DXFtoNC.ini: Settings file for CADCAM (normally generated automatically)  
 SETTINGS_EDITOR.ini Editor settings file (normally generated automatically)  
 SETTINGS_SIM.ini 2D simulator settings file (normally generated automatically)  
