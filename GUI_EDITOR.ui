@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow1</class>
+ <widget class="QMainWindow" name="MainWindow1">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>991</width>
+    <height>583</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>NcWorks EDITOR</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>PLANET.ico</normaloff>PLANET.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit2">
+      <property name="font">
+       <font>
+        <family>游ゴシック</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPlainTextEdit" name="plainTextEdit1">
+      <property name="font">
+       <font>
+        <family>游ゴシック</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>991</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu1">
+    <property name="title">
+     <string>メインプログラムの編集</string>
+    </property>
+    <addaction name="action1_1"/>
+    <addaction name="action1_2"/>
+    <addaction name="action1_3"/>
+    <addaction name="separator"/>
+    <addaction name="action1_4"/>
+    <addaction name="separator"/>
+    <addaction name="action1_5"/>
+    <addaction name="separator"/>
+    <addaction name="action1_6"/>
+    <addaction name="action1_7"/>
+   </widget>
+   <widget class="QMenu" name="menu2">
+    <property name="title">
+     <string>サブプログラムの編集</string>
+    </property>
+    <addaction name="action2_1"/>
+    <addaction name="action2_2"/>
+    <addaction name="action2_3"/>
+    <addaction name="separator"/>
+    <addaction name="action2_4"/>
+    <addaction name="separator"/>
+    <addaction name="action2_5"/>
+    <addaction name="separator"/>
+    <addaction name="action2_6"/>
+    <addaction name="action2_7"/>
+   </widget>
+   <widget class="QMenu" name="menu3">
+    <property name="title">
+     <string>ツール</string>
+    </property>
+    <addaction name="action3_1"/>
+   </widget>
+   <widget class="QMenu" name="menu4">
+    <property name="title">
+     <string>ヘルプ</string>
+    </property>
+    <addaction name="action4_1"/>
+    <addaction name="separator"/>
+    <addaction name="action4_2"/>
+   </widget>
+   <addaction name="menu1"/>
+   <addaction name="menu2"/>
+   <addaction name="menu3"/>
+   <addaction name="menu4"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action1_1">
+   <property name="text">
+    <string>開く</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="action1_2">
+   <property name="text">
+    <string>上書き保存</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="action1_3">
+   <property name="text">
+    <string>名前を付けて保存</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="action2_1">
+   <property name="text">
+    <string>開く</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="action2_2">
+   <property name="text">
+    <string>上書き保存</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="action2_3">
+   <property name="text">
+    <string>名前を付けて保存</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="action1_4">
+   <property name="text">
+    <string>DXFファイルへ変換</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="action2_4">
+   <property name="text">
+    <string>DXFファイルへ変換</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="action3_1">
+   <property name="text">
+    <string>DXFファイルをプログラムへ変換</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="action1_5">
+   <property name="text">
+    <string>整列</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="action2_5">
+   <property name="text">
+    <string>整列</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
+   </property>
+  </action>
+  <action name="action1_6">
+   <property name="text">
+    <string>シミュレーションを実行</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="action2_6">
+   <property name="text">
+    <string>シミュレーションを実行</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="action1_7">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>プログラムを自動保存してシミュレーションを実行</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
+   </property>
+  </action>
+  <action name="action2_7">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>プログラムを自動保存してシミュレーションを実行</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+J</string>
+   </property>
+  </action>
+  <action name="action4_1">
+   <property name="text">
+    <string>NcWorksについて</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="action4_2">
+   <property name="text">
+    <string>マニュアル</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
