@@ -52,7 +52,7 @@ GUI_EDITOR.ui: GUI creation file (for QT Designer)
 GUI_SIM.py: GUI program for the 2D simulator (Python program)  
 GUI_SIM.ui: GUI creation file (for QT Designer)  
 NcWorks.py: Main program  
-NcWors.zip            Compressed executable file (download it, unzip it to this folder and you can start using it immediately)  
+NcWors.zip: Compressed executable file (download it, unzip it to this folder and you can start using it immediately)  
 https://github.com/DAIKICHI-PSC/NcWorks/releases/download/V5.0.0/NcWorks.zip  
 PLANET.ico: Icon file  
 README.txt: Main file  
