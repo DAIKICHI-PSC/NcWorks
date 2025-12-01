@@ -52,6 +52,8 @@ GUI_EDITOR.ui: GUI creation file (for QT Designer)
 GUI_SIM.py: GUI program for the 2D simulator (Python program)  
 GUI_SIM.ui: GUI creation file (for QT Designer)  
 NcWorks.py: Main program  
+NcWors.zip            Compressed executable file (download it, unzip it to this folder and you can start using it immediately)  
+https://github.com/DAIKICHI-PSC/NcWorks/releases/download/V5.0.0/NcWorks.zip  
 PLANET.ico: Icon file  
 README.txt: Main file  
 SETTINGS_DXFtoNC.ini: Settings file for CADCAM (normally generated automatically)  
@@ -106,6 +108,8 @@ GUI_EDITOR.ui         GUI作成用ファイル（QT Designer用）
 GUI_SIM.py            二次元シミュレーター用のGUIプログラム(Pythonプログラム)  
 GUI_SIM.ui            GUI作成用ファイル（QT Designer用）  
 NcWorks.py            メインプログラム  
+NcWors.zip            圧縮された実行ファイル（ダウンロードして、本フォルダに解凍すれば即時に運用可能）  
+https://github.com/DAIKICHI-PSC/NcWorks/releases/download/V5.0.0/NcWorks.zip  
 PLANET.ico            アイコンファイル  
 README.txt            本ファイル  
 SETTINGS_DXFtoNC.ini  CADCAM用の設定ファイル（本来は自動で生成されます）  
