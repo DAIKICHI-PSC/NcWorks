@@ -56,6 +56,8 @@ Sub_NcTools.py Calculation module
 
 ---
 
+自動盤（スイス型旋盤）のエディター、二次元シミュレーター、二次元CADCAM  
+  
 [概要]  
 本プログラムは、自動盤（スイス型旋盤）のエディター、二次元シミュレーター、二次元CADCAMを提供します。  
 視覚的にプログラムの作成、確認が出来るので、大幅な時間短縮（コスト削減）に貢献すると思います。  
@@ -105,4 +107,45 @@ SETTINGS_EDITOR.ini   エディター用の設定ファイル（本来は自動�
 SETTINGS_SIM.ini      二次元シミュレーター用の設定ファイル（本来は自動で生成されます）  
 Sub_MathPlus.py       演算用のモジュール  
 Sub_NcTools.py        演算用のモジュール  
+
+---
+
+［LICENSE ライセンス］  
+This program(本プログラム)  
+MIT LISENCE  
+Distribution, modification, commercial use, etc. are all permitted.(配布、改変、商用利用等、全て自由です。)  
   
+Python  
+Python Software Foundation License  
+Distribution, modification, commercial use, etc. of the resulting work are all permitted.(成果物の配布、改変、商用利用等、全て自由です。)  
+  
+PySide6  
+LGPLv3  
+Distribution and commercial use are permitted.(配布、商用利用が可能です。)  
+  
+ezdxf  
+MIT LISENCE  
+Distribution, modification, commercial use, etc. are all permitted(配布、改変、商用利用等、全て自由です。)  
+  
+pyinstaller  
+https://github.com/pyinstaller/pyinstaller/wiki/FAQ  
+Distribution, modification, commercial use, etc. of the resulting work are all permitted.(成果物の配布、改変、商用利用等、全て自由です。)  
+
+---
+
+［appreciation 感謝］  
+Developer of Python(programming language)  
+Python Software Foundation and the community  
+https://www.python.org/  
+  
+Developer of GUI module  
+The Qt Company  
+https://www.qt.io/ja-jp/  
+  
+Developer of dxf handling module for Python  
+Manfred Moitzi and the community  
+https://github.com/mozman  
+  
+Developer of software that converts Python programs to executable file  
+pyinstaller and the community  
+https://github.com/pyinstaller  
