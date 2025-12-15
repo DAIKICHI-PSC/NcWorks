@@ -14,6 +14,14 @@ https://github.com/user-attachments/assets/a0fcf17d-8a56-41c7-b6a8-133d358568a3
 
 ---
 
+Source Code
+https://github.com/DAIKICHI-PSC/NcWorks/archive/refs/heads/main.zip
+
+excutable files
+https://github.com/DAIKICHI-PSC/NcWorks/releases/download/V5.0.0/NcWorks.zip
+  
+---
+  
 NC PROGRAM EDITOR, 2D SIMULATOR AND 2D CADCAM FOR SWISS-TYPE LATHE
   
 [Overview]  
