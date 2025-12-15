@@ -20,6 +20,7 @@ https://github.com/DAIKICHI-PSC/NcWorks/archive/refs/heads/main.zip
 Excutable files(実行ファイル)
 https://github.com/DAIKICHI-PSC/NcWorks/releases/download/V5.0.0/NcWorks.zip
 
+Using nuitka to compile source code will enable NcWorks to run faster (if it is detected as a virus, please allow its use).
 nuitkaを使用してソースコードコンパイルすると、NcWorksを高速に動作させる事が可能です（ウイルスとして検出された場合は、使用を許可して下さい）。
   
 ---
