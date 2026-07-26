@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NcWorks V5.0.0 - User Manual</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --accent: #e74c3c;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e6;
+            --code-bg: #f1f2f6;
+            --success: #27ae60;
+            --warning: #f39c12;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.8;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--primary);
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 100;
+        }
+        .sidebar h1 {
+            font-size: 22px;
+            padding: 0 20px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 5px;
+        }
+        .sidebar .version {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            padding: 0 20px 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            display: block;
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            padding: 6px 20px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .sidebar a.section-title {
+            font-weight: bold;
+            color: white;
+            padding: 10px 20px 4px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+        .sidebar a.sub {
+            padding-left: 35px;
+            font-size: 13px;
+        }
+        .main {
+            margin-left: 280px;
+            padding: 40px 60px 80px;
+            max-width: 1100px;
+        }
+        h2 {
+            font-size: 28px;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 8px;
+            margin: 50px 0 20px;
+        }
+        h3 {
+            font-size: 20px;
+            color: var(--primary-light);
+            margin: 30px 0 12px;
+            padding-left: 12px;
+            border-left: 4px solid var(--primary-light);
+        }
+        h4 {
+            font-size: 16px;
+            color: var(--text);
+            margin: 20px 0 8px;
+        }
+        p { margin: 10px 0; }
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .card h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 13.5px;
+        }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 18px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 8px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        tr:nth-child(even) { background: #f8f9fa; }
+        tr:hover { background: #eaf2f8; }
+        .note {
+            background: #eaf2f8;
+            border-left: 4px solid var(--primary-light);
+            padding: 14px 18px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .warning {
+            background: #fef9e7;
+            border-left: 4px solid var(--warning);
+            padding: 14px 18px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .danger {
+            background: #fdedec;
+            border-left: 4px solid var(--accent);
+            padding: 14px 18px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .success {
+            background: #eafaf1;
+            border-left: 4px solid var(--success);
+            padding: 14px 18px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .step {
+            display: flex;
+            gap: 16px;
+            margin: 12px 0;
+            align-items: flex-start;
+        }
+        .step-num {
+            flex-shrink: 0;
+            width: 32px; height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .step-content { flex: 1; padding-top: 4px; }
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        .badge-blue { background: var(--primary-light); }
+        .badge-green { background: var(--success); }
+        .badge-orange { background: var(--warning); }
+        .badge-red { background: var(--accent); }
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 50px 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .hero h2 {
+            color: white;
+            border-bottom: none;
+            font-size: 36px;
+            margin: 0 0 10px;
+        }
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .feature-card .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .feature-card h4 {
+            color: var(--primary);
+            margin: 8px 0;
+        }
+        .feature-card p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        .toc-list li {
+            padding: 4px 0;
+        }
+        .toc-list a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+        .shortcut {
+            display: inline-block;
+            background: #2c3e50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: monospace;
+            margin: 0 2px;
+        }
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; padding: 20px; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="sidebar">
+    <h1>NcWorks</h1>
+    <div class="version">V5.0.0 Manual</div>
+    <a href="#overview" class="section-title">Overview</a>
+    <a href="#overview" class="sub">Introduction</a>
+    <a href="#features" class="sub">Features</a>
+    <a href="#requirements" class="sub">Requirements</a>
+    <a href="#installation" class="section-title">Installation</a>
+    <a href="#installation" class="sub">Executable Version</a>
+    <a href="#source-install" class="sub">Source Code Version</a>
+    <a href="#structure" class="sub">Directory Structure</a>
+    <a href="#editor" class="section-title">Editor</a>
+    <a href="#editor-menu" class="sub">Menu List</a>
+    <a href="#editor-shortcut" class="sub">Shortcuts</a>
+    <a href="#editor-dxf" class="sub">DXF Export</a>
+    <a href="#simulator" class="section-title">2D Simulator</a>
+    <a href="#sim-workflow" class="sub">Workflow</a>
+    <a href="#sim-menu" class="sub">Menu List</a>
+    <a href="#sim-control" class="sub">Controls</a>
+    <a href="#sim-display" class="sub">Display Options</a>
+    <a href="#sim-tool" class="sub">Tool Settings</a>
+    <a href="#sim-measure" class="sub">Dimension Measurement</a>
+    <a href="#cadcamm" class="section-title">2D CAD/CAM</a>
+    <a href="#cam-workflow" class="sub">Workflow</a>
+    <a href="#cam-dxf-rules" class="sub">DXF Creation Rules</a>
+    <a href="#cam-settings" class="sub">Conversion Settings</a>
+    <a href="#nc-commands" class="section-title">Supported NC Commands</a>
+    <a href="#g-codes" class="sub">G-Codes</a>
+    <a href="#m-codes" class="sub">M-Codes</a>
+    <a href="#nc-sample" class="sub">Sample Program</a>
+    <a href="#tools" class="section-title">Tool Data</a>
+    <a href="#tool-format" class="sub">Creating DXF Tools</a>
+    <a href="#tool-samples" class="sub">Sample Tools List</a>
+    <a href="#settings" class="section-title">Settings Files</a>
+    <a href="#settings-files" class="sub">Settings Files List</a>
+    <a href="#settings-sim" class="sub">Simulator Settings</a>
+    <a href="#api" class="section-title">Internal API</a>
+    <a href="#api-functions" class="sub">Main Functions</a>
+    <a href="#troubleshooting" class="section-title">Troubleshooting</a>
+    <a href="#license" class="section-title">License</a>
+</nav>
+
+<div class="main">
+
+    <!-- ===== Overview ===== -->
+    <div class="hero" id="overview">
+        <h2>NcWorks V5.0.0</h2>
+        <p>NC PROGRAM EDITOR, 2D SIMULATOR AND 2D CADCAM FOR SWISS-TYPE LATHE</p>
+        <p>Integrated NC Program Editor, 2D Simulator, and 2D CAD/CAM Software for Swiss-Type Lathes</p>
+    </div>
+
+    <div class="card">
+        <h4>Introduction</h4>
+        <p>NcWorks is an integrated software designed for automatic lathes (Swiss-type lathes). It allows visual program creation and verification, contributing to significant time reduction (cost savings).</p>
+        <p>Commercially available CAD/CAM software is expensive and cannot simulate from NC code, which is why this program was created. It supports only the XZ plane and can be used to standardize NC programs.</p>
+    </div>
+
+    <h3 id="features">Features</h3>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="icon">&#128221;</div>
+            <h4>NC Editor</h4>
+            <p>Simultaneous editing of main and sub programs, syntax display, DXF export, auto-save and simulation execution</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">&#128640;</div>
+            <h4>2D Simulator</h4>
+            <p>Visual NC program verification, DXF tool shape import, real-time cutting simulation, dimension measurement</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">&#127959;</div>
+            <h4>2D CAD/CAM</h4>
+            <p>Auto-generate NC programs from DXF files drawn in CAD, convert tool paths layer by layer</p>
+        </div>
+    </div>
+
+    <h3 id="requirements">System Requirements</h3>
+    <div class="card">
+        <table>
+            <tr><th>Item</th><th>Requirement</th></tr>
+            <tr><td>OS</td><td>Windows 10 / 11 (64-bit)</td></tr>
+            <tr><td>Python</td><td>Python 3.x (for source code execution)</td></tr>
+            <tr><td>GUI Framework</td><td>PySide6 (Qt 6)</td></tr>
+            <tr><td>DXF Library</td><td>ezdxf</td></tr>
+            <tr><td>Compiler</td><td>PyInstaller / Nuitka (optional)</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== Installation ===== -->
+    <h2 id="installation">Installation</h2>
+
+    <h3 id="installation">Executable Version (Recommended)</h3>
+    <div class="card">
+        <p>Download the pre-compiled executable file and use it immediately.</p>
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                Download <a href="https://github.com/DAIKICHI-PSC/NcWorks/releases/download/V5.0.0/NcWorks.zip">NcWorks.zip</a>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                Extract to any folder
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                Double-click <code>NcWorks.exe</code> to launch
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>About Nuitka Compilation:</strong> Compiling the source code with Nuitka allows NcWorks to run faster. If detected as a virus, please allow its use.
+    </div>
+
+    <h3 id="source-install">Source Code Version</h3>
+    <div class="card">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                Download source code: <a href="https://github.com/DAIKICHI-PSC/NcWorks/archive/refs/heads/main.zip">main.zip</a>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                Install required Python packages: <code>pip install PySide6 ezdxf</code>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                Launch with <code>python NcWorks.py</code>
+            </div>
+        </div>
+    </div>
+
+    <h3 id="structure">Directory Structure</h3>
+    <div class="card">
+        <pre><code>NcWorks/
+├── NcWorks.py              # Main program (entry point)
+├── GUI_EDITOR.py           # Editor GUI module
+├── GUI_EDITOR.ui           # Editor UI definition file
+├── GUI_SIM.py              # Simulator GUI module
+├── GUI_SIM.ui              # Simulator UI definition file
+├── GUI_DXFtoNC.py          # CAD/CAM GUI module
+├── GUI_DXFtoNC.ui          # CAD/CAM UI definition file
+├── Sub_NcTools.py          # NC program parsing/conversion module
+├── Sub_MathPlus.py         # Math computation module
+├── PLANET.ico              # Application icon
+├── SETTINGS_DXFtoNC.ini    # CAD/CAM settings file (auto-generated)
+├── SETTINGS_EDITOR.ini     # Editor settings file (auto-generated)
+├── SETTINGS_SIM.ini        # Simulator settings file (auto-generated)
+├── sample/                 # Sample NC programs
+│   ├── sample_NC_program.m # Sample NC program
+│   ├── sample_NC_program.mdd # Material diameter data
+│   └── sample_NC_program.tdd # Tool data settings
+├── sample_cam/             # CAD/CAM sample data
+│   └── sample_CAM_file.dxf # Sample tool path DXF
+└── sample_tools/           # Simulator sample tools
+    ├── CENTER_DRILL.dxf    # Center drill
+    ├── HIRAGIRI.dxf        # Boring bar
+    ├── MAEBIKI.dxf         # Roughing tool
+    ├── MIZO.dxf            # Grooving tool
+    ├── TANMEN_MIZO.dxf     # Face grooving tool
+    ├── TSUKKIRI.dxf        # Parting/cutting-off tool
+    └── URABIKI.dxf         # Back turning tool</code></pre>
+    </div>
+
+    <!-- ===== Editor ===== -->
+    <h2 id="editor">NC Program Editor</h2>
+    <p>The NC program editor launches as the main window. You can edit main and sub programs simultaneously in a split left-right layout.</p>
+
+    <h3 id="editor-menu">Menu List</h3>
+
+    <h4>Main Program Editing</h4>
+    <table>
+        <tr><th>Menu</th><th>Shortcut</th><th>Function</th></tr>
+        <tr><td>Open</td><td><span class="shortcut">Ctrl+Q</span></td><td>Open NC program file (.m)</td></tr>
+        <tr><td>Save</td><td><span class="shortcut">Ctrl+W</span></td><td>Overwrite save current file</td></tr>
+        <tr><td>Save As</td><td><span class="shortcut">Ctrl+E</span></td><td>Save with a new filename</td></tr>
+        <tr><td>Convert to DXF File</td><td><span class="shortcut">Ctrl+R</span></td><td>Export NC program as DXF file (visualize tool paths)</td></tr>
+        <tr><td>Align</td><td><span class="shortcut">Ctrl+T</span></td><td>Align and format NC program commands</td></tr>
+        <tr><td>Run Simulation</td><td><span class="shortcut">Ctrl+Y</span></td><td>Open simulator window and run simulation</td></tr>
+        <tr><td>Auto-save and Run Simulation</td><td><span class="shortcut">Ctrl+U</span></td><td>Save program then immediately run simulation (checkable)</td></tr>
+    </table>
+
+    <h4>Sub Program Editing</h4>
+    <table>
+        <tr><th>Menu</th><th>Shortcut</th><th>Function</th></tr>
+        <tr><td>Open</td><td><span class="shortcut">Ctrl+A</span></td><td>Open sub program file</td></tr>
+        <tr><td>Save</td><td><span class="shortcut">Ctrl+S</span></td><td>Overwrite save sub program</td></tr>
+        <tr><td>Save As</td><td><span class="shortcut">Ctrl+D</span></td><td>Save sub program with a new name</td></tr>
+        <tr><td>Convert to DXF File</td><td><span class="shortcut">Ctrl+F</span></td><td>Export sub program as DXF file</td></tr>
+        <tr><td>Align</td><td><span class="shortcut">Ctrl+G</span></td><td>Align and format sub program</td></tr>
+        <tr><td>Run Simulation</td><td><span class="shortcut">Ctrl+H</span></td><td>Run simulation with sub program</td></tr>
+        <tr><td>Auto-save and Run Simulation</td><td><span class="shortcut">Ctrl+J</span></td><td>Save sub program and run simulation (checkable)</td></tr>
+    </table>
+
+    <h4>Tools</h4>
+    <table>
+        <tr><th>Menu</th><th>Shortcut</th><th>Function</th></tr>
+        <tr><td>Convert DXF File to Program</td><td><span class="shortcut">Ctrl+Z</span></td><td>Open CAD/CAM window (DXF to NC conversion)</td></tr>
+    </table>
+
+    <h4>Help</h4>
+    <table>
+        <tr><th>Menu</th><th>Shortcut</th><th>Function</th></tr>
+        <tr><td>About NcWorks</td><td><span class="shortcut">Ctrl+X</span></td><td>Show version information dialog</td></tr>
+        <tr><td>Manual</td><td><span class="shortcut">Ctrl+C</span></td><td>Open this manual</td></tr>
+    </table>
+
+    <h3 id="editor-shortcut">Shortcut Keys Summary</h3>
+    <div class="card">
+        <table>
+            <tr><th>Key</th><th>Function</th></tr>
+            <tr><td><span class="shortcut">Ctrl+Q</span></td><td>Open main program</td></tr>
+            <tr><td><span class="shortcut">Ctrl+W</span></td><td>Save main program</td></tr>
+            <tr><td><span class="shortcut">Ctrl+E</span></td><td>Save main program as</td></tr>
+            <tr><td><span class="shortcut">Ctrl+R</span></td><td>Export main program to DXF</td></tr>
+            <tr><td><span class="shortcut">Ctrl+T</span></td><td>Align main program</td></tr>
+            <tr><td><span class="shortcut">Ctrl+Y</span></td><td>Simulate main program</td></tr>
+            <tr><td><span class="shortcut">Ctrl+U</span></td><td>Auto-save + simulate (main)</td></tr>
+            <tr><td><span class="shortcut">Ctrl+A</span></td><td>Open sub program</td></tr>
+            <tr><td><span class="shortcut">Ctrl+S</span></td><td>Save sub program</td></tr>
+            <tr><td><span class="shortcut">Ctrl+D</span></td><td>Save sub program as</td></tr>
+            <tr><td><span class="shortcut">Ctrl+F</span></td><td>Export sub program to DXF</td></tr>
+            <tr><td><span class="shortcut">Ctrl+G</span></td><td>Align sub program</td></tr>
+            <tr><td><span class="shortcut">Ctrl+H</span></td><td>Simulate sub program</td></tr>
+            <tr><td><span class="shortcut">Ctrl+J</span></td><td>Auto-save + simulate (sub)</td></tr>
+            <tr><td><span class="shortcut">Ctrl+Z</span></td><td>CAD/CAM conversion window</td></tr>
+            <tr><td><span class="shortcut">Ctrl+X</span></td><td>About dialog</td></tr>
+            <tr><td><span class="shortcut">Ctrl+C</span></td><td>Manual</td></tr>
+        </table>
+    </div>
+
+    <h3 id="editor-dxf">DXF Export Function</h3>
+    <div class="card">
+        <p>Exporting NC programs to DXF files allows you to visually verify tool paths in CAD software.</p>
+        <p>In the output DXF file, each tool's path is output as a separate layer. G00 (rapid traverse) and G01/G02/G03 (cutting moves) are color-coded.</p>
+        <div class="note">
+            <strong>Output Format:</strong> Linear interpolation (G01) and arc interpolation (G02/G03) are output so they connect accurately. Material shape can also be output as DXF.
+        </div>
+    </div>
+
+    <!-- ===== 2D Simulator ===== -->
+    <h2 id="simulator">2D Simulator</h2>
+    <p>A simulator that allows visual verification of NC programs. Ideal for training new employees and error prevention (poka-yoke).</p>
+
+    <h3 id="sim-workflow">Workflow</h3>
+    <div class="card">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>Create Program</strong> — Create an NC program in the editor, or load an existing program</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>Create Cutting Tool</strong> — Create a DXF file of the tool shape (refer to DXF files in <code>sample_tools</code> folder)</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content"><strong>Register Cutting Tool</strong> — Register tools in the 2D simulator (first time only for each program)</div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content"><strong>Specify Material Diameter</strong> — Set the material diameter in the 2D simulator (first time only for each program)</div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content"><strong>Run Simulation</strong> — Set display and execution speed, press "Start" then "Next" to run (uncheck "Single Block" for fully automatic execution)</div>
+        </div>
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content"><strong>Dimension Measurement</strong> — After simulation completes, simple dimension measurement is available</div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>How to Test:</strong> Load the program in the <code>sample</code> folder from the editor to test (the above settings are pre-configured). For internal machining tools such as drills, specify X0.
+    </div>
+
+    <h3 id="sim-menu">Menu List</h3>
+
+    <h4>File</h4>
+    <table>
+        <tr><th>Menu</th><th>Function</th></tr>
+        <tr><td>Open NC Program</td><td>Open NC program file with <span class="shortcut">Ctrl+Q</span></td></tr>
+        <tr><td>Open Tool Data</td><td>Open tool data settings file (.tdd) (enabled after simulation starts)</td></tr>
+        <tr><td>Save Tool Data</td><td>Save tool data settings (enabled after simulation starts)</td></tr>
+        <tr><td>Save Tool Path as DXF (Radius)</td><td>Export tool path as DXF with radius values</td></tr>
+        <tr><td>Save Tool Path as DXF (Diameter)</td><td>Export tool path as DXF with diameter values</td></tr>
+        <tr><td>Save Tool Path as DXF (Diameter, Separate Layers)</td><td>Export each tool as a separate DXF layer</td></tr>
+        <tr><td>Remember Tool Folder</td><td>Store the path of the currently selected tool folder</td></tr>
+    </table>
+
+    <h4>Display</h4>
+    <table>
+        <tr><th>Menu</th><th>Default</th><th>Function</th></tr>
+        <tr><td>Reset Display</td><td>—</td><td>Reset display to initial state</td></tr>
+        <tr><td>G50 Enabled</td><td>—</td><td>Apply G50 (incremental feed) offset to simulation</td></tr>
+        <tr><td>Move to Program Coordinates</td><td>—</td><td>Align view to program coordinates</td></tr>
+        <tr><td>Both-Side Display</td><td>—</td><td>Display tool paths symmetrically about the Y-axis</td></tr>
+        <tr><td>Show Center Line</td><td>ON</td><td>Show center line (Z-axis)</td></tr>
+        <tr><td>Show Guide Bush</td><td>ON</td><td>Show guide bush shape (enabled during simulation only)</td></tr>
+        <tr><td>Show Guide Bush Semi-Transparent</td><td>—</td><td>Show guide bush with semi-transparency</td></tr>
+        <tr><td>Show Cutting Tool Reference Position Marker</td><td>ON</td><td>Show marker indicating tool reference position</td></tr>
+        <tr><td>Show Cutting Tool Semi-Transparent</td><td>—</td><td>Show cutting tool with semi-transparency</td></tr>
+        <tr><td>Show Program Coordinate Markers</td><td>ON</td><td>Show coordinate markers at each movement point</td></tr>
+        <tr><td>Show All Program Paths</td><td>—</td><td>Display all tool paths at once</td></tr>
+        <tr><td>Show Program Paths Individually</td><td>ON</td><td>Show only the currently executing tool's path</td></tr>
+        <tr><td>Hide Program Paths</td><td>—</td><td>Hide tool paths</td></tr>
+        <tr><td>Show Program Details</td><td>ON</td><td>Show G-code and coordinate text at each movement point</td></tr>
+        <tr><td>Enlarge Display of Destination Program</td><td>ON</td><td>Enlarge display of the next destination program text</td></tr>
+        <tr><td>Show All Program</td><td>—</td><td>Show all program text</td></tr>
+        <tr><td>Show Program Individually</td><td>ON</td><td>Show only the currently executing line</td></tr>
+        <tr><td>Hide Program</td><td>—</td><td>Hide program text</td></tr>
+        <tr><td>Enable Program Dragging</td><td>—</td><td>Enable drag-to-move for program text</td></tr>
+    </table>
+
+    <h4>Execution Speed</h4>
+    <table>
+        <tr><th>Menu</th><th>Default</th><th>Function</th></tr>
+        <tr><td>x1</td><td>—</td><td>Execute at 1x speed</td></tr>
+        <tr><td>x2</td><td>—</td><td>Execute at 2x speed</td></tr>
+        <tr><td>x4</td><td>—</td><td>Execute at 4x speed</td></tr>
+        <tr><td>x8</td><td>ON</td><td>Execute at 8x speed (default)</td></tr>
+        <tr><td>x16</td><td>—</td><td>Execute at 16x speed</td></tr>
+        <tr><td>Full Speed</td><td>ON</td><td>Execute at maximum speed (default)</td></tr>
+    </table>
+
+    <h4>Edit</h4>
+    <table>
+        <tr><th>Menu</th><th>Function</th></tr>
+        <tr><td>Save as Image</td><td>Save the current simulation screen as an image file</td></tr>
+    </table>
+
+    <h3 id="sim-control">Control Box</h3>
+    <div class="card">
+        <table>
+            <tr><th>Button</th><th>Function</th></tr>
+            <tr><td><strong>Start</strong></td><td>Start simulation. Program is parsed and tool paths are drawn</td></tr>
+            <tr><td><strong>Stop</strong></td><td>Stop simulation. Return to edit mode</td></tr>
+            <tr><td><strong>Previous</strong></td><td>Go back one block (enabled during simulation only)</td></tr>
+            <tr><td><strong>Next</strong></td><td>Advance one block (enabled during simulation only)</td></tr>
+            <tr><td><strong>Material Diameter</strong></td><td>Show dialog to input material diameter (1.0 to 50.0mm, 3 decimal places)</td></tr>
+            <tr><td><strong>Single Block</strong></td><td>When checked, execute one line at a time with "Next" button. When unchecked, fully automatic execution</td></tr>
+        </table>
+    </div>
+
+    <h3 id="sim-display">Display Options Detail</h3>
+    <div class="card">
+        <h4>Font Size</h4>
+        <p>You can change the display size of program text. The following sizes are available:</p>
+        <table>
+            <tr><th>Size</th><th>Description</th></tr>
+            <tr><td>5</td><td>Smallest</td></tr>
+            <tr><td>10</td><td>Small</td></tr>
+            <tr><td>15</td><td>—</td></tr>
+            <tr><td>20</td><td>—</td></tr>
+            <tr><td>25</td><td>Large</td></tr>
+        </table>
+    </div>
+
+    <h3 id="sim-tool">Tool Settings</h3>
+    <div class="card">
+        <h4>Tool List (Left Panel)</h4>
+        <p>Tool numbers (T-codes) detected from the NC program are listed.</p>
+        <ul>
+            <li><strong>Click:</strong> Open tool parameter input dialog</li>
+            <li><strong>Double-click:</strong> Select/change the tool's DXF file</li>
+        </ul>
+
+        <h4>Tool Parameter Input Dialog</h4>
+        <table>
+            <tr><th>Parameter</th><th>Description</th><th>Default</th></tr>
+            <tr><td>Tool Mount Shift X (Actual)</td><td>X-axis tool mounting error compensation</td><td>0</td></tr>
+            <tr><td>Tool Mount Shift Z</td><td>Z-axis tool mounting error compensation</td><td>0</td></tr>
+            <tr><td>Geometric X (Diameter Value)</td><td>Geometric offset X (diameter specification)</td><td>0</td></tr>
+            <tr><td>Geometric Z</td><td>Geometric offset Z</td><td>0</td></tr>
+            <tr><td>Offset X (Diameter Value)</td><td>Correction offset X (diameter specification)</td><td>0</td></tr>
+            <tr><td>Offset Z</td><td>Correction offset Z</td><td>0</td></tr>
+            <tr><td>Nose R Compensation Tip No.</td><td>Cutting edge R compensation tip number (not implemented)</td><td>0</td></tr>
+            <tr><td>Nose R Compensation R</td><td>Cutting edge R radius value (not implemented)</td><td>0</td></tr>
+        </table>
+    </div>
+
+    <div class="warning">
+        <strong>Note:</strong> The cutting edge R compensation function is currently not implemented. Nose R compensation parameters can be entered but will not be reflected in the simulation.
+    </div>
+
+    <h3 id="sim-measure">Dimension Measurement Function</h3>
+    <div class="card">
+        <p>After simulation is complete, dimension measurement is available with the following key operations:</p>
+        <table>
+            <tr><th>Key</th><th>Function</th></tr>
+            <tr><td><span class="shortcut">1</span></td><td>Set measurement point 1</td></tr>
+            <tr><td><span class="shortcut">2</span></td><td>Set measurement point 2</td></tr>
+            <tr><td><span class="shortcut">3</span></td><td>Detect face and outer diameter positions</td></tr>
+        </table>
+        <p>Measurement results are displayed in the lower-left panel. X coordinates, Z coordinates, and the distance between two points are calculated.</p>
+        <div class="note">
+            <strong>About X-axis Display:</strong> The NC X-axis value is treated as a diameter value and displayed as a radius value in the simulation. In measurement display, plus/minus are inverted to match NC standards.
+        </div>
+    </div>
+
+    <!-- ===== 2D CAD/CAM ===== -->
+    <h2 id="cadcamm">2D CAD/CAM (DXF to NC Conversion)</h2>
+    <p>Automatically generate NC programs from DXF files of tool paths drawn in CAD software.</p>
+
+    <h3 id="cam-workflow">Workflow</h3>
+    <div class="card">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>Draw Tool Paths in CAD</strong> — Draw each tool's path on separate layers (Zounou CAD RAPID 2D, JW_CAD, etc.)</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>Draw Circle at Start Point</strong> — Draw a CIRCLE at the start point of each path (diameter is arbitrary)</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content"><strong>Save DXF File</strong> — Save as DXF with layer numbers assigned</div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content"><strong>Load in NcWorks</strong> — Load the DXF file with the "Load DXF Data" button</div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content"><strong>Set Conversion</strong> — Set feed rate, spindle speed, and dwell</div>
+        </div>
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content"><strong>Save NC Program</strong> — Save the generated NC program to a file</div>
+        </div>
+    </div>
+
+    <h3 id="cam-dxf-rules">DXF Creation Rules</h3>
+    <div class="card">
+        <h4>Required Rules</h4>
+        <ul>
+            <li>Each tool's path must be drawn on a <strong>separate layer</strong> (layer number required)</li>
+            <li>Draw a <strong>CIRCLE</strong> at the start point of each path (diameter is arbitrary)</li>
+            <li>Movements on the same coordinates cannot be converted (draw in <strong>a single stroke</strong>)</li>
+        </ul>
+        <h4>Supported Entity Types</h4>
+        <ul>
+            <li><strong>LINE</strong> — Straight line (converted to G01)</li>
+            <li><strong>ARC</strong> — Arc (converted to G02/G03)</li>
+        </ul>
+        <div class="note">
+            <strong>About Single-Stroke Drawing:</strong> Normally, select <strong>No</strong> when asked "Is the line data drawn in a single stroke?"
+        </div>
+    </div>
+
+    <h3 id="cam-settings">Conversion Settings</h3>
+    <div class="card">
+        <table>
+            <tr><th>Setting</th><th>Options</th><th>Description</th></tr>
+            <tr><td>X/Z Direction Feed</td><td>1, 2, 3, 4, 5, 6, 7, 8, 9</td><td>G01 feed rate (F value)</td></tr>
+            <tr><td>Taper and R Feed</td><td>1, 2, 3, 4, 5, 6, 7, 8, 9</td><td>Feed rate for taper and R machining</td></tr>
+            <tr><td>Spindle Speed</td><td>500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000</td><td>Spindle speed (S value)</td></tr>
+            <tr><td>Dwell</td><td>0.1 to 0.9 (unit: seconds)</td><td>G4 dwell time (enable with checkbox)</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== Supported NC Commands ===== -->
+    <h2 id="nc-commands">Supported NC Commands</h2>
+
+    <h3 id="g-codes">G-Codes</h3>
+    <div class="card">
+        <table>
+            <tr><th>Code</th><th>Description</th><th>Status</th></tr>
+            <tr><td>G00</td><td>Rapid traverse</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G01</td><td>Linear interpolation</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G02</td><td>CW arc interpolation</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G03</td><td>CCW arc interpolation</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G04</td><td>Dwell (stop)</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G25</td><td>Program start</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G26</td><td>Program end</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G40</td><td>Compensation cancel</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G50</td><td>Incremental feed</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G92</td><td>Threading cycle</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G97</td><td>Constant RPM</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G98</td><td>Feed per minute</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G99</td><td>Feed per revolution</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G32</td><td>Taper threading cycle</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G84 / G184</td><td>Tapping cycle</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G02/G03 (R)</td><td>Arc interpolation with R specification</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>G41/G42</td><td>Cutting edge R compensation</td><td><span class="badge badge-red">Not Supported</span></td></tr>
+        </table>
+    </div>
+
+    <h3 id="m-codes">M-Codes</h3>
+    <div class="card">
+        <table>
+            <tr><th>Code</th><th>Description</th><th>Status</th></tr>
+            <tr><td>M03</td><td>Spindle forward</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>M05</td><td>Spindle stop</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>M09</td><td>Coolant off</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>M25</td><td>Program start</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>M59</td><td>Reset</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>M80</td><td>Subroutine end</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>M81</td><td>Subroutine end</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>M98</td><td>Subroutine call</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>M99</td><td>Subroutine return / Jump</td><td><span class="badge badge-green">Supported</span></td></tr>
+            <tr><td>M99 P_</td><td>Jump to N number</td><td><span class="badge badge-green">Supported</span></td></tr>
+        </table>
+    </div>
+
+    <h4>Addresses</h4>
+    <div class="card">
+        <table>
+            <tr><th>Address</th><th>Description</th></tr>
+            <tr><td>X</td><td>X coordinate (diameter value)</td></tr>
+            <tr><td>Z</td><td>Z coordinate</td></tr>
+            <tr><td>U</td><td>X-axis incremental</td></tr>
+            <tr><td>W</td><td>Z-axis incremental</td></tr>
+            <tr><td>R</td><td>Arc radius</td></tr>
+            <tr><td>F</td><td>Feed rate</td></tr>
+            <tr><td>S</td><td>Spindle speed</td></tr>
+            <tr><td>T</td><td>Tool number (T100 to T9999)</td></tr>
+            <tr><td>N</td><td>Line number</td></tr>
+            <tr><td>P</td><td>Jump destination number / Dwell time</td></tr>
+        </table>
+    </div>
+
+    <h3 id="nc-sample">Sample NC Program</h3>
+    <div class="card">
+        <p>Explanation of the sample program included in <code>sample/sample_NC_program.m</code>:</p>
+        <pre><code>O6005
+G25
+M25
+G40 G97 M59 (RESET)
+G99 M3 S500
+M11
+G4 U1.0
+G0 Z10.0 T0
+M200
+M20
+
+M10
+T100
+G0 X17.0 Z-1.0 T0
+M27 (TOOLEMGSTOP)
+G99 M3 S5000
+
+G25
+M3 S5000
+G26
+T1100 (CENTER-DRILL)
+G0 X0 Z0 T11
+G1 Z2.1 F0.03
+G4 U0.2
+G0 Z-1.0
+T0
+
+G25
+M3 S5000
+G26
+T1200
+G0 X0 Z0 T12
+G1 Z10.6 F0.1
+G0 Z-1.0
+T0
+
+(Continues with T400 roughing, T300 face grooving, T200 back turning, T100 parting)
+
+G25
+M3 S4500
+G26
+T100 (TSUKKIRI-HABA=2.0)
+G0 X15.0 Z18.1 T1
+G1 X15.4 F0.2
+G1 X-0.3 F0.05
+G1 X-1.7 F0.1
+M80
+/ G0 X14.4 W-0.5
+/ G0 W2.0
+/ M98 P7000
+M81
+M99</code></pre>
+
+        <h4>Tools Used in Sample Program</h4>
+        <table>
+            <tr><th>Tool No.</th><th>Tool Name</th><th>DXF File</th></tr>
+            <tr><td>T1100</td><td>Center drill</td><td>CENTER_DRILL.dxf</td></tr>
+            <tr><td>T1200</td><td>Boring bar</td><td>HIRAGIRI.dxf</td></tr>
+            <tr><td>T400</td><td>Roughing tool</td><td>MAEBIKI.dxf</td></tr>
+            <tr><td>T300</td><td>Special face grooving tool</td><td>TANMEN_MIZO.dxf</td></tr>
+            <tr><td>T200</td><td>Back turning tool (width=2.0)</td><td>URABIKI.dxf</td></tr>
+            <tr><td>T100</td><td>Parting tool (width=2.0)</td><td>TSUKKIRI.dxf</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== Tool Data ===== -->
+    <h2 id="tools">Tool Data</h2>
+
+    <h3 id="tool-format">How to Create DXF Tools</h3>
+    <div class="card">
+        <p>Create cutting tool shapes as DXF files. Follow the rules below:</p>
+        <ul>
+            <li>Draw the tool cross-section shape (XZ plane)</li>
+            <li>Draw lines (LINE) or arcs (ARC) on a numbered layer name</li>
+            <li>Make the tool reference point (cutting edge) the starting point of the drawing</li>
+            <li>Draw as a closed shape (single stroke)</li>
+            <li>Unit is mm</li>
+        </ul>
+        <div class="note">
+            <strong>Reference:</strong> Refer to the DXF files in the <code>sample_tools</code> folder to create your tool data.
+        </div>
+    </div>
+
+    <h3 id="tool-samples">Sample Tools List</h3>
+    <div class="card">
+        <table>
+            <tr><th>Filename</th><th>Tool Type</th><th>Description</th></tr>
+            <tr><td>CENTER_DRILL.dxf</td><td>Center drill</td><td>Center drilling tool</td></tr>
+            <tr><td>HIRAGIRI.dxf</td><td>Boring bar</td><td>Finish boring tool</td></tr>
+            <tr><td>MAEBIKI.dxf</td><td>Roughing tool</td><td>OD roughing tool</td></tr>
+            <tr><td>MIZO.dxf</td><td>Grooving tool</td><td>Groove machining tool</td></tr>
+            <tr><td>TANMEN_MIZO.dxf</td><td>Face grooving tool</td><td>Face groove machining tool</td></tr>
+            <tr><td>TSUKKIRI.dxf</td><td>Parting tool</td><td>Cutting-off tool</td></tr>
+            <tr><td>URABIKI.dxf</td><td>Back turning tool</td><td>Back side OD machining tool</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== Settings Files ===== -->
+    <h2 id="settings">Settings Files</h2>
+
+    <h3 id="settings-files">Settings Files List</h3>
+    <div class="card">
+        <table>
+            <tr><th>File</th><th>Description</th><th>Location</th></tr>
+            <tr><td>SETTINGS_EDITOR.ini</td><td>Editor settings (auto-save on/off, etc.)</td><td><code>~/NcWorks_SETTINGS/</code></td></tr>
+            <tr><td>SETTINGS_SIM.ini</td><td>Simulator settings (display options, etc.)</td><td><code>~/NcWorks_SETTINGS/</code></td></tr>
+            <tr><td>SETTINGS_DXFtoNC.ini</td><td>CAD/CAM settings (feed rate, spindle speed, etc.)</td><td><code>~/NcWorks_SETTINGS/</code></td></tr>
+            <tr><td>SETTINGS_DIR.ini</td><td>Tool folder path</td><td><code>~/NcWorks_SETTINGS/</code></td></tr>
+            <tr><td>*.tdd</td><td>Tool data settings (same directory as NC program)</td><td>Same location as NC program</td></tr>
+            <tr><td>*.mdd</td><td>Material diameter data (same directory as NC program)</td><td>Same location as NC program</td></tr>
+        </table>
+    </div>
+
+    <h3 id="settings-sim">Simulator Settings (SETTINGS_SIM.ini)</h3>
+    <div class="card">
+        <p>Each parameter is saved separated by newlines:</p>
+        <table>
+            <tr><th>Line</th><th>Parameter</th><th>Description</th></tr>
+            <tr><td>1</td><td>Material diameter</td><td>Material radius value (saved as negative value)</td></tr>
+            <tr><td>2</td><td>Display mode</td><td>1=Both-side display, 2=Single-side display</td></tr>
+            <tr><td>3</td><td>Path display</td><td>1=Individual display, 2=All display, 3=Hidden</td></tr>
+            <tr><td>4</td><td>Program display</td><td>1=Individual display, 2=All display, 3=Hidden</td></tr>
+            <tr><td>5</td><td>Font size</td><td>1=Smallest, 2=Small, 3=Medium, 4=Large, 5=Largest</td></tr>
+            <tr><td>6</td><td>Execution speed</td><td>1=x1, 2=x2, 3=x4, 4=x8, 5=x16, 6=Full</td></tr>
+            <tr><td>7</td><td>G50 enabled</td><td>0=Disabled, 1=Enabled</td></tr>
+            <tr><td>8+</td><td>Display options</td><td>Various display flags (0=OFF, 1=ON)</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== Internal API ===== -->
+    <h2 id="api">Internal API Reference</h2>
+
+    <h3 id="api-functions">Main Functions List</h3>
+
+    <h4>Sub_NcTools.py — NC Program Parsing Module</h4>
+    <div class="card">
+        <table>
+            <tr><th>Function</th><th>Description</th></tr>
+            <tr><td><code>NC_SPLITTER(text)</code></td><td>Split NC program text into command and value arrays</td></tr>
+            <tr><td><code>NC_PROGRAM_TEXT(prog)</code></td><td>Convert array-ized NC program back to text</td></tr>
+            <tr><td><code>NC_MOVEMENT(prog, g50)</code></td><td>Extract movement data from array-ized data (per tool, per line)</td></tr>
+            <tr><td><code>NC_SIMPLE_PATH(data, ...)</code></td><td>Convert movement data to simple tool path</td></tr>
+            <tr><td><code>NC_PATH(data, ...)</code></td><td>Convert movement data to detailed per-tool, per-movement paths</td></tr>
+            <tr><td><code>NC_REALTIME_MOVEMENT(data)</code></td><td>Generate fine-grained movement data for real-time simulation</td></tr>
+            <tr><td><code>NC_REALTIME_MOVEMENT_G0_1(...)</code></td><td>Calculate intermediate coordinates for linear movement</td></tr>
+            <tr><td><code>NC_REALTIME_MOVEMENT_G2_3(...)</code></td><td>Calculate intermediate coordinates for arc movement</td></tr>
+            <tr><td><code>NC_REALTIME_PATH(data)</code></td><td>Convert real-time movement data to paths</td></tr>
+            <tr><td><code>PROGRAM_TO_DXF(data, ...)</code></td><td>Output NC program as a DXF file</td></tr>
+            <tr><td><code>CONVERT_CLOSED_DXF(path, ...)</code></td><td>Get closed tool shape path from DXF file</td></tr>
+            <tr><td><code>CONVERT_G98_TO_G99(s, f)</code></td><td>Convert feed-per-minute (G98) to feed-per-rev (G99)</td></tr>
+            <tr><td><code>CONVERT_G99_TO_G98(s, f)</code></td><td>Convert feed-per-rev (G99) to feed-per-minute (G98)</td></tr>
+            <tr><td><code>DXF_TO_NC(...)</code></td><td>Convert DXF tool path to NC program</td></tr>
+        </table>
+    </div>
+
+    <h4>Sub_MathPlus.py — Math Computation Module</h4>
+    <div class="card">
+        <table>
+            <tr><th>Function</th><th>Description</th></tr>
+            <tr><td><code>RND(value)</code></td><td>Round to 3 decimal places (0.001 unit, positive/negative direction)</td></tr>
+            <tr><td><code>RND_2(value)</code></td><td>Round to 4 decimal places (0.0001 unit, positive/negative direction)</td></tr>
+            <tr><td><code>GET_POS_ON_ARC(cx, cy, a1, a2, r)</code></td><td>Get start and end points on a circle from center and angles</td></tr>
+            <tr><td><code>ROTATION_DIRECTION_DETECTOR(...)</code></td><td>Detect G2/G3 rotation direction from start, end, and center points</td></tr>
+            <tr><td><code>INTERSECTION_DETECTOR(...)</code></td><td>Detect intersection of two lines</td></tr>
+            <tr><td><code>GET_CROSS_POINT(...)</code></td><td>Calculate intersection coordinates of two lines</td></tr>
+            <tr><td><code>R_CENTER_DEGREE(...)</code></td><td>Calculate circle center and angles from two points and radius</td></tr>
+            <tr><td><code>R_CENTER_DEGREE2(...)</code></td><td>Same as above (QPainterPath specification)</td></tr>
+            <tr><td><code>R_POSITION(cx, cy, r, deg)</code></td><td>Calculate coordinates on a circle from center, radius, and angle</td></tr>
+            <tr><td><code>CALCULATE_DEGREE(x, z)</code></td><td>Calculate angle from two side lengths</td></tr>
+            <tr><td><code>CALCULATE_Aa_c(a, deg)</code></td><td>Calculate other side from given side and angle</td></tr>
+            <tr><td><code>CALCULATE_Ac_a(c, deg)</code></td><td>Calculate other side from given side and angle</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== Troubleshooting ===== -->
+    <h2 id="troubleshooting">Troubleshooting</h2>
+
+    <div class="card">
+        <h4>Error Occurs During Simulation</h4>
+        <ul>
+            <li><strong>Cause:</strong> R value not specified for G02/G03, or F value is 0</li>
+            <li><strong>Solution:</strong> Always specify R value for arc interpolation and F value for cutting moves</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>Tool Is Not Displayed</h4>
+        <ul>
+            <li><strong>Cause:</strong> DXF file is incorrect, or tool is not registered</li>
+            <li><strong>Solution:</strong> Double-click in the tool list and select the correct DXF file</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>Simulation Freezes</h4>
+        <ul>
+            <li><strong>Cause:</strong> Feed rate is too small with G98 (less than 0.001)</li>
+            <li><strong>Solution:</strong> The system automatically limits to 0.001, but using G99 (feed per revolution) is recommended</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>Data Not Loaded in DXF Conversion</h4>
+        <ul>
+            <li><strong>Cause:</strong> No CIRCLE at start point in layer, or no line segments</li>
+            <li><strong>Solution:</strong> Ensure each layer has a CIRCLE (start point) and at least one line segment</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>Error When Zooming Too Much</h4>
+        <ul>
+            <li><strong>Cause:</strong> Overflow (improved in V4.0.0)</li>
+            <li><strong>Solution:</strong> Use V5.0.0</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>Nuitka Compiled Version Detected as Virus</h4>
+        <ul>
+            <li><strong>Cause:</strong> Executable files compiled with Nuitka may be falsely detected</li>
+            <li><strong>Solution:</strong> Add an exception in your security software to allow use</li>
+        </ul>
+    </div>
+
+    <!-- ===== License ===== -->
+    <h2 id="license">License</h2>
+    <div class="card">
+        <h4>NcWorks</h4>
+        <p><strong>MIT License</strong> — Distribution, modification, commercial use, and all other uses are permitted freely.</p>
+
+        <h4>Used Libraries</h4>
+        <table>
+            <tr><th>Library</th><th>License</th><th>Usage Terms</th></tr>
+            <tr><td>Python</td><td>PSF License</td><td>Distribution, modification, commercial use of resulting work permitted</td></tr>
+            <tr><td>PySide6</td><td>LGPLv3</td><td>Distribution and commercial use permitted</td></tr>
+            <tr><td>ezdxf</td><td>MIT License</td><td>Distribution, modification, commercial use permitted</td></tr>
+            <tr><td>PyInstaller</td><td>BSD-3-Clause</td><td>Distribution, modification, commercial use of resulting work permitted</td></tr>
+        </table>
+
+        <h4>Acknowledgments</h4>
+        <ul>
+            <li>Python developers — <a href="https://www.python.org/">Python Software Foundation</a></li>
+            <li>GUI module developers — <a href="https://www.qt.io/">The Qt Company</a></li>
+            <li>DXF processing module developer — <a href="https://github.com/mozman">Manfred Moitzi</a></li>
+            <li>Executable conversion software developers — <a href="https://github.com/pyinstaller">PyInstaller community</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align: center; margin-top: 60px; padding: 20px; color: var(--text-light); font-size: 13px;">
+        <p>NcWorks V5.0.0 Manual</p>
+        <p>&copy; 2025 DAIKICHI-PSC | <a href="https://github.com/DAIKICHI-PSC/NcWorks">GitHub</a></p>
+    </div>
+
+</div>
+
+</body>
+</html>

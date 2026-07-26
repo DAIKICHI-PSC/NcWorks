@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NcWorks V5.0.0 - 操作マニュアル</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --accent: #e74c3c;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e6;
+            --code-bg: #f1f2f6;
+            --success: #27ae60;
+            --warning: #f39c12;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.8;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--primary);
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 100;
+        }
+        .sidebar h1 {
+            font-size: 22px;
+            padding: 0 20px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 5px;
+        }
+        .sidebar .version {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            padding: 0 20px 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            display: block;
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            padding: 6px 20px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .sidebar a.section-title {
+            font-weight: bold;
+            color: white;
+            padding: 10px 20px 4px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+        .sidebar a.sub {
+            padding-left: 35px;
+            font-size: 13px;
+        }
+        .main {
+            margin-left: 280px;
+            padding: 40px 60px 80px;
+            max-width: 1100px;
+        }
+        h2 {
+            font-size: 28px;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 8px;
+            margin: 50px 0 20px;
+        }
+        h3 {
+            font-size: 20px;
+            color: var(--primary-light);
+            margin: 30px 0 12px;
+            padding-left: 12px;
+            border-left: 4px solid var(--primary-light);
+        }
+        h4 {
+            font-size: 16px;
+            color: var(--text);
+            margin: 20px 0 8px;
+        }
+        p { margin: 10px 0; }
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .card h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 13.5px;
+        }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 18px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 8px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        tr:nth-child(even) { background: #f8f9fa; }
+        tr:hover { background: #eaf2f8; }
+        .note {
+            background: #eaf2f8;
+            border-left: 4px solid var(--primary-light);
+            padding: 14px 18px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .warning {
+            background: #fef9e7;
+            border-left: 4px solid var(--warning);
+            padding: 14px 18px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .danger {
+            background: #fdedec;
+            border-left: 4px solid var(--accent);
+            padding: 14px 18px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .success {
+            background: #eafaf1;
+            border-left: 4px solid var(--success);
+            padding: 14px 18px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .step {
+            display: flex;
+            gap: 16px;
+            margin: 12px 0;
+            align-items: flex-start;
+        }
+        .step-num {
+            flex-shrink: 0;
+            width: 32px; height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .step-content { flex: 1; padding-top: 4px; }
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        .badge-blue { background: var(--primary-light); }
+        .badge-green { background: var(--success); }
+        .badge-orange { background: var(--warning); }
+        .badge-red { background: var(--accent); }
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 50px 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .hero h2 {
+            color: white;
+            border-bottom: none;
+            font-size: 36px;
+            margin: 0 0 10px;
+        }
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .feature-card .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .feature-card h4 {
+            color: var(--primary);
+            margin: 8px 0;
+        }
+        .feature-card p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        .toc-list li {
+            padding: 4px 0;
+        }
+        .toc-list a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+        .shortcut {
+            display: inline-block;
+            background: #2c3e50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: monospace;
+            margin: 0 2px;
+        }
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; padding: 20px; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="sidebar">
+    <h1>NcWorks</h1>
+    <div class="version">V5.0.0 Manual</div>
+    <a href="#overview" class="section-title">概要</a>
+    <a href="#overview" class="sub">製品紹介</a>
+    <a href="#features" class="sub">主な機能</a>
+    <a href="#requirements" class="sub">動作環境</a>
+    <a href="#installation" class="section-title">インストール</a>
+    <a href="#installation" class="sub">実行ファイル版</a>
+    <a href="#source-install" class="sub">ソースコード版</a>
+    <a href="#structure" class="sub">ディレクトリ構成</a>
+    <a href="#editor" class="section-title">エディター</a>
+    <a href="#editor-menu" class="sub">メニュー一覧</a>
+    <a href="#editor-shortcut" class="sub">ショートカット</a>
+    <a href="#editor-dxf" class="sub">DXF出力</a>
+    <a href="#simulator" class="section-title">2Dシミュレーター</a>
+    <a href="#sim-workflow" class="sub">作業フロー</a>
+    <a href="#sim-menu" class="sub">メニュー一覧</a>
+    <a href="#sim-control" class="sub">コントロール</a>
+    <a href="#sim-display" class="sub">表示オプション</a>
+    <a href="#sim-tool" class="sub">工具設定</a>
+    <a href="#sim-measure" class="sub">寸法測定</a>
+    <a href="#cadcamm" class="section-title">2D CAD/CAM</a>
+    <a href="#cam-workflow" class="sub">作業フロー</a>
+    <a href="#cam-dxf-rules" class="sub">DXF作成ルール</a>
+    <a href="#cam-settings" class="sub">変換設定</a>
+    <a href="#nc-commands" class="section-title">対応NCコマンド</a>
+    <a href="#g-codes" class="sub">Gコード</a>
+    <a href="#m-codes" class="sub">Mコード</a>
+    <a href="#nc-sample" class="sub">サンプルプログラム</a>
+    <a href="#tools" class="section-title">工具データ</a>
+    <a href="#tool-format" class="sub">DXF工具の作成</a>
+    <a href="#tool-samples" class="sub">サンプル工具一覧</a>
+    <a href="#settings" class="section-title">設定ファイル</a>
+    <a href="#settings-files" class="sub">設定ファイル一覧</a>
+    <a href="#settings-sim" class="sub">シミュレーター設定</a>
+    <a href="#api" class="section-title">内部API</a>
+    <a href="#api-functions" class="sub">主要関数一覧</a>
+    <a href="#troubleshooting" class="section-title">トラブルシューティング</a>
+    <a href="#license" class="section-title">ライセンス</a>
+</nav>
+
+<div class="main">
+
+    <!-- ===== 概要 ===== -->
+    <div class="hero" id="overview">
+        <h2>NcWorks V5.0.0</h2>
+        <p>NC PROGRAM EDITOR, 2D SIMULATOR AND 2D CADCAM FOR SWISS-TYPE LATHE</p>
+        <p>自動盤（スイス型旋盤）用のNCプログラムエディター、2Dシミュレーター、2D CAD/CAM統合ソフトウェア</p>
+    </div>
+
+    <div class="card">
+        <h4>製品紹介</h4>
+        <p>NcWorksは、自動盤（スイス型旋盤）向けに設計された統合ソフトウェアです。視覚的にプログラムの作成・確認ができるため、大幅な時間短縮（コスト削減）に貢献します。</p>
+        <p>市販のCAD/CAMは高額でNCコードからのシミュレーションができないため、このプログラムが作成されました。XZ平面のみに対応し、NCプログラムの標準化に活用できます。</p>
+    </div>
+
+    <h3 id="features">主な機能</h3>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="icon">&#128221;</div>
+            <h4>NCエディター</h4>
+            <p>メインプログラムとサブプログラムの同時編集、シンタックス表示、DXFファイルへのエクスポート、自動保存＆シミュレーション実行</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">&#128640;</div>
+            <h4>2Dシミュレーター</h4>
+            <p>NCプログラムの視覚的確認、工具形状のDXF読み込み、リアルタイム切削シミュレーション、寸法測定機能</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">&#127959;</div>
+            <h4>2D CAD/CAM</h4>
+            <p>CADで描いたDXFファイルからNCプログラムを自動生成、工具軌跡をレイヤーごとに変換</p>
+        </div>
+    </div>
+
+    <h3 id="requirements">動作環境</h3>
+    <div class="card">
+        <table>
+            <tr><th>項目</th><th>要件</th></tr>
+            <tr><td>OS</td><td>Windows 10 / 11（64bit）</td></tr>
+            <tr><td>Python</td><td>Python 3.x（ソースコード実行時）</td></tr>
+            <tr><td>GUIフレームワーク</td><td>PySide6（Qt 6）</td></tr>
+            <tr><td>DXFライブラリ</td><td>ezdxf</td></tr>
+            <tr><td>コンパイラ</td><td>PyInstaller / Nuitka（オプション）</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== インストール ===== -->
+    <h2 id="installation">インストール</h2>
+
+    <h3 id="installation">実行ファイル版（推奨）</h3>
+    <div class="card">
+        <p>コンパイル済みの実行ファイルをダウンロードして、すぐに使用できます。</p>
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <a href="https://github.com/DAIKICHI-PSC/NcWorks/releases/download/V5.0.0/NcWorks.zip">NcWorks.zip</a> をダウンロード
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                任意のフォルダに解凍
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <code>NcWorks.exe</code> をダブルクリックして起動
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>Nuitkaコンパイル版について:</strong> Nuitkaを使用してソースコードをコンパイルすると、NcWorksを高速に動作させることができます。ウイルスとして検出された場合は、使用を許可してください。
+    </div>
+
+    <h3 id="source-install">ソースコード版</h3>
+    <div class="card">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                ソースコードをダウンロード：<a href="https://github.com/DAIKICHI-PSC/NcWorks/archive/refs/heads/main.zip">main.zip</a>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                必要なPythonパッケージをインストール：<code>pip install PySide6 ezdxf</code>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <code>python NcWorks.py</code> で起動
+            </div>
+        </div>
+    </div>
+
+    <h3 id="structure">ディレクトリ構成</h3>
+    <div class="card">
+        <pre><code>NcWorks/
+├── NcWorks.py              # メインプログラム（エントリーポイント）
+├── GUI_EDITOR.py           # エディター用GUIモジュール
+├── GUI_EDITOR.ui           # エディター用UI定義ファイル
+├── GUI_SIM.py              # シミュレーター用GUIモジュール
+├── GUI_SIM.ui              # シミュレーター用UI定義ファイル
+├── GUI_DXFtoNC.py          # CAD/CAM用GUIモジュール
+├── GUI_DXFtoNC.ui          # CAD/CAM用UI定義ファイル
+├── Sub_NcTools.py          # NCプログラム解析・変換モジュール
+├── Sub_MathPlus.py         # 数学演算モジュール
+├── PLANET.ico              # アプリケーションアイコン
+├── SETTINGS_DXFtoNC.ini    # CAD/CAM設定ファイル（自動生成）
+├── SETTINGS_EDITOR.ini     # エディター設定ファイル（自動生成）
+├── SETTINGS_SIM.ini        # シミュレーター設定ファイル（自動生成）
+├── sample/                 # サンプルNCプログラム
+│   ├── sample_NC_program.m # サンプルNCプログラム
+│   ├── sample_NC_program.mdd # 材料径データ
+│   └── sample_NC_program.tdd # 工具データ設定
+├── sample_cam/             # CAD/CAM用サンプルデータ
+│   └── sample_CAM_file.dxf # サンプル工具軌跡DXF
+└── sample_tools/           # シミュレーター用サンプル工具
+    ├── CENTER_DRILL.dxf    # センタードリル
+    ├── HIRAGIRI.dxf        # 平ぐり
+    ├── MAEBIKI.dxf         # 前びき
+    ├── MIZO.dxf            # 溝切り
+    ├── TANMEN_MIZO.dxf     # 端面溝
+    ├── TSUKKIRI.dxf        # 突き切り
+    └── URABIKI.dxf         # 裏びき</code></pre>
+    </div>
+
+    <!-- ===== エディター ===== -->
+    <h2 id="editor">NCプログラムエディター</h2>
+    <p>メインウィンドウとして起動するNCプログラムエディターです。メインプログラムとサブプログラムを左右に分割して同時に編集できます。</p>
+
+    <h3 id="editor-menu">メニュー一覧</h3>
+
+    <h4>メインプログラムの編集</h4>
+    <table>
+        <tr><th>メニュー</th><th>ショートカット</th><th>機能</th></tr>
+        <tr><td>開く</td><td><span class="shortcut">Ctrl+Q</span></td><td>NCプログラムファイル（.m）を開く</td></tr>
+        <tr><td>上書き保存</td><td><span class="shortcut">Ctrl+W</span></td><td>現在のファイルに上書き保存</td></tr>
+        <tr><td>名前を付けて保存</td><td><span class="shortcut">Ctrl+E</span></td><td>新しいファイル名で保存</td></tr>
+        <tr><td>DXFファイルへ変換</td><td><span class="shortcut">Ctrl+R</span></td><td>NCプログラムをDXFファイルとして出力（工具軌跡を可視化）</td></tr>
+        <tr><td>整列</td><td><span class="shortcut">Ctrl+T</span></td><td>NCプログラムのコマンドを整列・フォーマット</td></tr>
+        <tr><td>シミュレーションを実行</td><td><span class="shortcut">Ctrl+Y</span></td><td>シミュレーターウィンドウを開いてシミュレーションを実行</td></tr>
+        <tr><td>プログラムを自動保存してシミュレーションを実行</td><td><span class="shortcut">Ctrl+U</span></td><td>プログラムを保存した直後にシミュレーションを実行（チェック可能）</td></tr>
+    </table>
+
+    <h4>サブプログラムの編集</h4>
+    <table>
+        <tr><th>メニュー</th><th>ショートカット</th><th>機能</th></tr>
+        <tr><td>開く</td><td><span class="shortcut">Ctrl+A</span></td><td>サブプログラムファイルを開く</td></tr>
+        <tr><td>上書き保存</td><td><span class="shortcut">Ctrl+S</span></td><td>サブプログラムを上書き保存</td></tr>
+        <tr><td>名前を付けて保存</td><td><span class="shortcut">Ctrl+D</span></td><td>サブプログラムを新しい名前で保存</td></tr>
+        <tr><td>DXFファイルへ変換</td><td><span class="shortcut">Ctrl+F</span></td><td>サブプログラムをDXFファイルとして出力</td></tr>
+        <tr><td>整列</td><td><span class="shortcut">Ctrl+G</span></td><td>サブプログラムを整列・フォーマット</td></tr>
+        <tr><td>シミュレーションを実行</td><td><span class="shortcut">Ctrl+H</span></td><td>サブプログラムでシミュレーションを実行</td></tr>
+        <tr><td>プログラムを自動保存してシミュレーションを実行</td><td><span class="shortcut">Ctrl+J</span></td><td>サブプログラムを保存してシミュレーション（チェック可能）</td></tr>
+    </table>
+
+    <h4>ツール</h4>
+    <table>
+        <tr><th>メニュー</th><th>ショートカット</th><th>機能</th></tr>
+        <tr><td>DXFファイルをプログラムへ変換</td><td><span class="shortcut">Ctrl+Z</span></td><td>CAD/CAMウィンドウを開く（DXF→NC変換）</td></tr>
+    </table>
+
+    <h4>ヘルプ</h4>
+    <table>
+        <tr><th>メニュー</th><th>ショートカット</th><th>機能</th></tr>
+        <tr><td>NcWorksについて</td><td><span class="shortcut">Ctrl+X</span></td><td>バージョン情報ダイアログを表示</td></tr>
+        <tr><td>マニュアル</td><td><span class="shortcut">Ctrl+C</span></td><td>このマニュアルを開く</td></tr>
+    </table>
+
+    <h3 id="editor-shortcut">ショートカットキーまとめ</h3>
+    <div class="card">
+        <table>
+            <tr><th>キー</th><th>機能</th></tr>
+            <tr><td><span class="shortcut">Ctrl+Q</span></td><td>メインプログラムを開く</td></tr>
+            <tr><td><span class="shortcut">Ctrl+W</span></td><td>メインプログラムを保存</td></tr>
+            <tr><td><span class="shortcut">Ctrl+E</span></td><td>メインプログラムを名前付けて保存</td></tr>
+            <tr><td><span class="shortcut">Ctrl+R</span></td><td>メインプログラムをDXF出力</td></tr>
+            <tr><td><span class="shortcut">Ctrl+T</span></td><td>メインプログラムを整列</td></tr>
+            <tr><td><span class="shortcut">Ctrl+Y</span></td><td>メインプログラムでシミュレーション</td></tr>
+            <tr><td><span class="shortcut">Ctrl+U</span></td><td>自動保存＋シミュレーション（メイン）</td></tr>
+            <tr><td><span class="shortcut">Ctrl+A</span></td><td>サブプログラムを開く</td></tr>
+            <tr><td><span class="shortcut">Ctrl+S</span></td><td>サブプログラムを保存</td></tr>
+            <tr><td><span class="shortcut">Ctrl+D</span></td><td>サブプログラムを名前付けて保存</td></tr>
+            <tr><td><span class="shortcut">Ctrl+F</span></td><td>サブプログラムをDXF出力</td></tr>
+            <tr><td><span class="shortcut">Ctrl+G</span></td><td>サブプログラムを整列</td></tr>
+            <tr><td><span class="shortcut">Ctrl+H</span></td><td>サブプログラムでシミュレーション</td></tr>
+            <tr><td><span class="shortcut">Ctrl+J</span></td><td>自動保存＋シミュレーション（サブ）</td></tr>
+            <tr><td><span class="shortcut">Ctrl+Z</span></td><td>CAD/CAM変換ウィンドウ</td></tr>
+            <tr><td><span class="shortcut">Ctrl+X</span></td><td>バージョン情報</td></tr>
+            <tr><td><span class="shortcut">Ctrl+C</span></td><td>マニュアル</td></tr>
+        </table>
+    </div>
+
+    <h3 id="editor-dxf">DXF出力機能</h3>
+    <div class="card">
+        <p>NCプログラムからDXFファイルを出力することで、工具軌跡をCADソフトで視覚的に確認できます。</p>
+        <p>出力されるDXFファイルには、各工具の軌跡が異なるレイヤーとして出力されます。G00（素早く移動）とG01/G02/G03（切削移動）が色分けされています。</p>
+        <div class="note">
+            <strong>出力形式:</strong> 直線補間（G01）、円弧補間（G02/G03）が正確に接続されるように出力されます。材料形状もDXFとして出力可能です。
+        </div>
+    </div>
+
+    <!-- ===== 2Dシミュレーター ===== -->
+    <h2 id="simulator">2Dシミュレーター</h2>
+    <p>NCプログラムを視覚的に確認できるシミュレーターです。新人教育、作業者のポカヨケに最適です。</p>
+
+    <h3 id="sim-workflow">作業フロー</h3>
+    <div class="card">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>プログラム作成</strong> — エディターでNCプログラムを作成、または既存のプログラムを読み込む</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>切削工具の作成</strong> — 工具形状のDXFファイルを作成（<code>sample_tools</code>フォルダのDXFファイルを参照）</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content"><strong>切削工具の登録</strong> — 二次元シミュレーターで工具を登録（各プログラムに対して初回のみ）</div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content"><strong>材料径を指定</strong> — 二次元シミュレーターで材料径を設定（各プログラムに対して初回のみ）</div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content"><strong>シミュレーション実行</strong> — 表示・実行スピードを設定し、「開始」→「次へ」で実行（「シングルブロック」チェックを外すと全自動実行）</div>
+        </div>
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content"><strong>寸法測定</strong> — シミュレーション終了後、簡易的に寸法測定が可能</div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>テスト方法:</strong> エディターで <code>sample</code> フォルダにあるプログラムを読み込んでテストしてください（上記は設定済み）。ドリル等の内径加工工具は、X0を指定してください。
+    </div>
+
+    <h3 id="sim-menu">メニュー一覧</h3>
+
+    <h4>ファイル</h4>
+    <table>
+        <tr><th>メニュー</th><th>機能</th></tr>
+        <tr><td>NCプログラムを開く</td><td><span class="shortcut">Ctrl+Q</span> でNCプログラムファイルを開く</td></tr>
+        <tr><td>工具データを開く</td><td>工具データ設定ファイル（.tdd）を開く（シミュレーション開始後有効）</td></tr>
+        <tr><td>工具データを保存</td><td>工具データ設定を保存（シミュレーション開始後有効）</td></tr>
+        <tr><td>工具軌跡をDXFとして保存（半径）</td><td>工具軌跡を半径値でDXF出力</td></tr>
+        <tr><td>工具軌跡をDXFとして保存（直径）</td><td>工具軌跡を直径値でDXF出力</td></tr>
+        <tr><td>工具軌跡をDXFとして保存（直径 全別レイヤ）</td><td>各工具を別レイヤーとしてDXF出力</td></tr>
+        <tr><td>工具フォルダを記憶</td><td>現在選択している工具フォルダのパスを記憶</td></tr>
+    </table>
+
+    <h4>表示</h4>
+    <table>
+        <tr><th>メニュー</th><th>デフォルト</th><th>機能</th></tr>
+        <tr><td>表示リセット</td><td>—</td><td>表示を初期状態にリセット</td></tr>
+        <tr><td>G50有効</td><td>—</td><td>G50（追従送り）のオフセットをシミュレーションに適用</td></tr>
+        <tr><td>プログラム座標を基準に移動</td><td>—</td><td>表示をプログラム座標に合わせる</td></tr>
+        <tr><td>両側表示</td><td>—</td><td>工具軌跡をY軸対称に両側表示</td></tr>
+        <tr><td>中心線を表示</td><td>ON</td><td>センターライン（Z軸）を表示</td></tr>
+        <tr><td>ガイドブッシュを表示</td><td>ON</td><td>ガイドブッシュの図形を表示（シミュレーション中のみ有効）</td></tr>
+        <tr><td>ガイドブッシュを半透明表示</td><td>—</td><td>ガイドブッシュを半透明で表示</td></tr>
+        <tr><td>切削工具基準位置マーカを表示</td><td>ON</td><td>工具の基準位置を示すマーカを表示</td></tr>
+        <tr><td>切削工具を半透明表示</td><td>—</td><td>切削工具を半透明で表示</td></tr>
+        <tr><td>プログラム座標マーカを表示</td><td>ON</td><td>各移動点に座標マーカを表示</td></tr>
+        <tr><td>プログラム軌跡を全表示</td><td>—</td><td>全工具の軌跡を一度に表示</td></tr>
+        <tr><td>プログラム軌跡を個別表示</td><td>ON</td><td>現在実行中の工具のみ軌跡を表示</td></tr>
+        <tr><td>プログラム軌跡を非表示</td><td>—</td><td>工具軌跡を非表示</td></tr>
+        <tr><td>プログラムの詳細を表示</td><td>ON</td><td>各移動点にGコード・座標値のテキストを表示</td></tr>
+        <tr><td>移動先のプログラムを拡大表示</td><td>ON</td><td>次の移動先のプログラムテキストを拡大表示</td></tr>
+        <tr><td>プログラムを全表示</td><td>—</td><td>すべてのプログラムテキストを表示</td></tr>
+        <tr><td>プログラムを個別表示</td><td>ON</td><td>現在実行中の行のみ表示</td></tr>
+        <tr><td>プログラムを非表示</td><td>—</td><td>プログラムテキストを非表示</td></tr>
+        <tr><td>プログラムを移動可能にする</td><td>—</td><td>プログラムテキストのドラッグ移動を有効化</td></tr>
+    </table>
+
+    <h4>実行スピード</h4>
+    <table>
+        <tr><th>メニュー</th><th>デフォルト</th><th>機能</th></tr>
+        <tr><td>x1</td><td>—</td><td>1倍速で実行</td></tr>
+        <tr><td>x2</td><td>—</td><td>2倍速で実行</td></tr>
+        <tr><td>x4</td><td>—</td><td>4倍速で実行</td></tr>
+        <tr><td>x8</td><td>ON</td><td>8倍速で実行（デフォルト）</td></tr>
+        <tr><td>x16</td><td>—</td><td>16倍速で実行</td></tr>
+        <tr><td>フルスピード</td><td>ON</td><td>最大速度で実行（デフォルト）</td></tr>
+    </table>
+
+    <h4>編集</h4>
+    <table>
+        <tr><th>メニュー</th><th>機能</th></tr>
+        <tr><td>画像として保存</td><td>現在のシミュレーション画面を画像ファイルとして保存</td></tr>
+    </table>
+
+    <h3 id="sim-control">コントロールボックス</h3>
+    <div class="card">
+        <table>
+            <tr><th>ボタン</th><th>機能</th></tr>
+            <tr><td><strong>開始</strong></td><td>シミュレーションを開始。プログラムが解析され、工具軌跡が描画される</td></tr>
+            <tr><td><strong>停止</strong></td><td>シミュレーションを停止。編集モードに戻る</td></tr>
+            <tr><td><strong>前へ</strong></td><td>1ブロック分戻る（シミュレーション中のみ有効）</td></tr>
+            <tr><td><strong>次へ</strong></td><td>1ブロック分進む（シミュレーション中のみ有効）</td></tr>
+            <tr><td><strong>材料径指定</strong></td><td>材料の直径を入力するダイアログを表示（1.0〜50.0mm、小数点3桁）</td></tr>
+            <tr><td><strong>シングルブロック</strong></td><td>チェックを入れると「次へ」ボタンで1行ずつ実行。外すと全自動実行</td></tr>
+        </table>
+    </div>
+
+    <h3 id="sim-display">表示オプション詳細</h3>
+    <div class="card">
+        <h4>フォントサイズ</h4>
+        <p>プログラムテキストの表示サイズを変更できます。以下のサイズが選択可能です：</p>
+        <table>
+            <tr><th>サイズ</th><th>説明</th></tr>
+            <tr><td>5</td><td>最小サイズ</td></tr>
+            <tr><td>10</td><td>小サイズ</td></tr>
+            <tr><td>15</td><td>—</td></tr>
+            <tr><td>20</td><td>—</td></tr>
+            <tr><td>25</td><td>大サイズ</td></tr>
+        </table>
+    </div>
+
+    <h3 id="sim-tool">工具設定</h3>
+    <div class="card">
+        <h4>工具リスト（左パネル）</h4>
+        <p>NCプログラムから検出された工具番号（Tコード）が一覧表示されます。</p>
+        <ul>
+            <li><strong>クリック:</strong> 工具パラメータ入力ダイアログを開く</li>
+            <li><strong>ダブルクリック:</strong> 工具のDXFファイルを選択・変更</li>
+        </ul>
+
+        <h4>工具パラメータ入力ダイアログ</h4>
+        <table>
+            <tr><th>パラメータ</th><th>説明</th><th>デフォルト</th></tr>
+            <tr><td>工具取り付けシフト X（実寸）</td><td>工具のX方向取り付け誤差補正</td><td>0</td></tr>
+            <tr><td>工具取り付けシフト Z</td><td>工具のZ方向取り付け誤差補正</td><td>0</td></tr>
+            <tr><td>ジオメトリオ X（直径値）</td><td>ジオメトリオオフセットX（直径指定）</td><td>0</td></tr>
+            <tr><td>ジオメトリオ Z</td><td>ジオメトリオオフセットZ</td><td>0</td></tr>
+            <tr><td>オフセット X（直径値）</td><td>修正オフセットX（直径指定）</td><td>0</td></tr>
+            <tr><td>オフセット Z</td><td>修正オフセットZ</td><td>0</td></tr>
+            <tr><td>ノーズR補正刃先番号</td><td>刃先R補正の刃先番号（未実装）</td><td>0</td></tr>
+            <tr><td>ノーズR補正R</td><td>刃先Rの半径値（未実装）</td><td>0</td></tr>
+        </table>
+    </div>
+
+    <div class="warning">
+        <strong>注意:</strong> 刃先R補正機能は現在未実装です。ノーズR補正のパラメータ入力は可能ですが、シミュレーションには反映されません。
+    </div>
+
+    <h3 id="sim-measure">寸法測定機能</h3>
+    <div class="card">
+        <p>シミュレーション終了後、以下のキー操作で寸法測定が可能です：</p>
+        <table>
+            <tr><th>キー</th><th>機能</th></tr>
+            <tr><td><span class="shortcut">1</span></td><td>測定ポイント1を設定</td></tr>
+            <tr><td><span class="shortcut">2</span></td><td>測定ポイント2を設定</td></tr>
+            <tr><td><span class="shortcut">3</span></td><td>端面と外径の位置を検出</td></tr>
+        </table>
+        <p>測定結果は左下のパネルに表示されます。X座標、Z座標、および2点間の距離が計算されます。</p>
+        <div class="note">
+            <strong>X軸の表示について:</strong> NCのX軸値は直径値として扱われ、シミュレーション上では半径値で表示されます。測定表示ではNC規格に合わせプラス・マイナスが反転して表示されます。
+        </div>
+    </div>
+
+    <!-- ===== 2D CAD/CAM ===== -->
+    <h2 id="cadcamm">2D CAD/CAM（DXF → NC変換）</h2>
+    <p>CADソフトで描画した工具軌跡のDXFファイルから、NCプログラムを自動生成します。</p>
+
+    <h3 id="cam-workflow">作業フロー</h3>
+    <div class="card">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>CADで工具軌跡を描画</strong> — 各工具の軌跡をレイヤーごとに描画（頭脳CAD RAPID 2D、JW_CAD等）</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>開始点に円を描画</strong> — 各軌跡の開始点にCIRCLEを描画（直径は任意）</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content"><strong>DXFファイルを保存</strong> — レイヤー番号を付与してDXFとして保存</div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content"><strong>NcWorksで読み込み</strong> — 「DXFデータの読み込み」ボタンでDXFファイルをロード</div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content"><strong>変換設定</strong> — 送り値、回転数、ドウェルを設定</div>
+        </div>
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content"><strong>NCプログラムを保存</strong> — 生成されたNCプログラムをファイルに保存</div>
+        </div>
+    </div>
+
+    <h3 id="cam-dxf-rules">DXF作成ルール</h3>
+    <div class="card">
+        <h4>必須ルール</h4>
+        <ul>
+            <li>各工具の軌跡は<strong>別レイヤー</strong>に描画（レイヤー番号が必要）</li>
+            <li>軌跡の開始点に <strong>CIRCLE</strong> を描画（直径は任意）</li>
+            <li>同一座標上の移動は変換できない（<strong>一筆書き</strong>で描画）</li>
+        </ul>
+        <h4>対応線種</h4>
+        <ul>
+            <li><strong>LINE</strong> — 直線（G01に変換）</li>
+            <li><strong>ARC</strong> — 円弧（G02/G03に変換）</li>
+        </ul>
+        <div class="note">
+            <strong>一筆書きについて:</strong> 通常は「線分データは、一筆書きで描かれていますか？」の問いに対して <strong>No</strong> を選択してください。
+        </div>
+    </div>
+
+    <h3 id="cam-settings">変換設定</h3>
+    <div class="card">
+        <table>
+            <tr><th>設定項目</th><th>オプション</th><th>説明</th></tr>
+            <tr><td>縦横方向の送り</td><td>1, 2, 3, 4, 5, 6, 7, 8, 9</td><td>G01の送り値（F値）</td></tr>
+            <tr><td>テーパーとRの送り</td><td>1, 2, 3, 4, 5, 6, 7, 8, 9</td><td>テーパー・R加工の送り値</td></tr>
+            <tr><td>回転数</td><td>500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000</td><td>主轴回転数（S値）</td></tr>
+            <tr><td>ドウェル</td><td>0.1〜0.9（単位: 秒）</td><td>G4ドウェル時間（チェックでON）</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== 対応NCコマンド ===== -->
+    <h2 id="nc-commands">対応NCコマンド</h2>
+
+    <h3 id="g-codes">Gコード</h3>
+    <div class="card">
+        <table>
+            <tr><th>コード</th><th>説明</th><th>ステータス</th></tr>
+            <tr><td>G00</td><td>素早く移動</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G01</td><td>直線補間</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G02</td><td>時計回り円弧補間</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G03</td><td>反時計回り円弧補間</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G04</td><td>ドウェル（停止）</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G25</td><td>プログラムの開始</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G26</td><td>プログラムの終了</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G40</td><td>補正キャンセル</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G50</td><td>追従送り（インクリメンタル）</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G92</td><td>ねじ切りサイクル</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G97</td><td>一定回転数</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G98</td><td>分送り</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G99</td><td>回転送り</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G32</td><td>テーパーねじ切りサイクル</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G84 / G184</td><td>タップサイクル</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G02/G03 (R)</td><td>R指定による円弧補間</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>G41/G42</td><td>刃先R補正</td><td><span class="badge badge-red">未対応</span></td></tr>
+        </table>
+    </div>
+
+    <h3 id="m-codes">Mコード</h3>
+    <div class="card">
+        <table>
+            <tr><th>コード</th><th>説明</th><th>ステータス</th></tr>
+            <tr><td>M03</td><td>主轴正転</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>M05</td><td>主轴停止</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>M09</td><td>冷却液OFF</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>M25</td><td>プログラム開始</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>M59</td><td>リセット</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>M80</td><td>サブルーチン終了</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>M81</td><td>サブルーチン終了</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>M98</td><td>サブルーチン呼び出し</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>M99</td><td>サブルーチン戻り / ジャンプ</td><td><span class="badge badge-green">対応</span></td></tr>
+            <tr><td>M99 P_</td><td>N番号へジャンプ</td><td><span class="badge badge-green">対応</span></td></tr>
+        </table>
+    </div>
+
+    <h4>アドレス</h4>
+    <div class="card">
+        <table>
+            <tr><th>アドレス</th><th>説明</th></tr>
+            <tr><td>X</td><td>X座標（直径値）</td></tr>
+            <tr><td>Z</td><td>Z座標</td></tr>
+            <tr><td>U</td><td>X方向インクリメンタル</td></tr>
+            <tr><td>W</td><td>Z方向インクリメンタル</td></tr>
+            <tr><td>R</td><td>円弧半径</td></tr>
+            <tr><td>F</td><td>送り速度</td></tr>
+            <tr><td>S</td><td>主轴回転数</td></tr>
+            <tr><td>T</td><td>工具番号（T100〜T9999）</td></tr>
+            <tr><td>N</td><td>行番号</td></tr>
+            <tr><td>P</td><td>ジャンプ先番号 / ドウェル時間</td></tr>
+        </table>
+    </div>
+
+    <h3 id="nc-sample">サンプルNCプログラム</h3>
+    <div class="card">
+        <p><code>sample/sample_NC_program.m</code> に含まれるサンプルプログラムの解説：</p>
+        <pre><code>O6005
+G25
+M25
+G40 G97 M59 (RESET)
+G99 M3 S500
+M11
+G4 U1.0
+G0 Z10.0 T0
+M200
+M20
+
+M10
+T100
+G0 X17.0 Z-1.0 T0
+M27 (TOOLEMGSTOP)
+G99 M3 S5000
+
+G25
+M3 S5000
+G26
+T1100 (CENTER-DRILL)
+G0 X0 Z0 T11
+G1 Z2.1 F0.03
+G4 U0.2
+G0 Z-1.0
+T0
+
+G25
+M3 S5000
+G26
+T1200
+G0 X0 Z0 T12
+G1 Z10.6 F0.1
+G0 Z-1.0
+T0
+
+（以下、T400前びき、T300端面溝、T200裏びき、T100突き切り）
+
+G25
+M3 S4500
+G26
+T100 (TSUKKIRI-HABA=2.0)
+G0 X15.0 Z18.1 T1
+G1 X15.4 F0.2
+G1 X-0.3 F0.05
+G1 X-1.7 F0.1
+M80
+/ G0 X14.4 W-0.5
+/ G0 W2.0
+/ M98 P7000
+M81
+M99</code></pre>
+
+        <h4>サンプルプログラムで使用する工具</h4>
+        <table>
+            <tr><th>工具番号</th><th>工具名</th><th>DXFファイル</th></tr>
+            <tr><td>T1100</td><td>センタードリル</td><td>CENTER_DRILL.dxf</td></tr>
+            <tr><td>T1200</td><td>平ぐり</td><td>HIRAGIRI.dxf</td></tr>
+            <tr><td>T400</td><td>前びき</td><td>MAEBIKI.dxf</td></tr>
+            <tr><td>T300</td><td>特殊端面溝</td><td>TANMEN_MIZO.dxf</td></tr>
+            <tr><td>T200</td><td>裏びき（幅=2.0）</td><td>URABIKI.dxf</td></tr>
+            <tr><td>T100</td><td>突き切り（幅=2.0）</td><td>TSUKKIRI.dxf</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== 工具データ ===== -->
+    <h2 id="tools">工具データ</h2>
+
+    <h3 id="tool-format">DXF工具の作成方法</h3>
+    <div class="card">
+        <p>切削工具の形状をDXFファイルとして作成します。以下のルールに従ってください：</p>
+        <ul>
+            <li>工具の断面形状（XZ平面）を描画</li>
+            <li>番号のレイヤー名に直線（LINE）または円弧（ARC）を描画</li>
+            <li>工具の基準点（刃先）が描画の開始点となるようにする</li>
+            <li>閉じた形状として描画（一筆書き）</li>
+            <li>単位はmm</li>
+        </ul>
+        <div class="note">
+            <strong>参考:</strong> <code>sample_tools</code> フォルダにあるDXFファイルを参考にして工具データを作成してください。
+        </div>
+    </div>
+
+    <h3 id="tool-samples">サンプル工具一覧</h3>
+    <div class="card">
+        <table>
+            <tr><th>ファイル名</th><th>工具種</th><th>説明</th></tr>
+            <tr><td>CENTER_DRILL.dxf</td><td>センタードリル</td><td>中心穴あけ用工具</td></tr>
+            <tr><td>HIRAGIRI.dxf</td><td>平ぐり</td><td>内径仕上げ用工具</td></tr>
+            <tr><td>MAEBIKI.dxf</td><td>前びき</td><td>外径粗削り用工具</td></tr>
+            <tr><td>MIZO.dxf</td><td>溝切り</td><td>溝加工用工具</td></tr>
+            <tr><td>TANMEN_MIZO.dxf</td><td>端面溝</td><td>端面溝加工用工具</td></tr>
+            <tr><td>TSUKKIRI.dxf</td><td>突き切り</td><td>切断用工具</td></tr>
+            <tr><td>URABIKI.dxf</td><td>裏びき</td><td>裏側外径加工用工具</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== 設定ファイル ===== -->
+    <h2 id="settings">設定ファイル</h2>
+
+    <h3 id="settings-files">設定ファイル一覧</h3>
+    <div class="card">
+        <table>
+            <tr><th>ファイル</th><th>説明</th><th>保存場所</th></tr>
+            <tr><td>SETTINGS_EDITOR.ini</td><td>エディターの設定（自動保存ON/OFF等）</td><td><code>~/NcWorks_SETTINGS/</code></td></tr>
+            <tr><td>SETTINGS_SIM.ini</td><td>シミュレーターの設定（表示オプション等）</td><td><code>~/NcWorks_SETTINGS/</code></td></tr>
+            <tr><td>SETTINGS_DXFtoNC.ini</td><td>CAD/CAMの設定（送り値・回転数等）</td><td><code>~/NcWorks_SETTINGS/</code></td></tr>
+            <tr><td>SETTINGS_DIR.ini</td><td>工具フォルダのパス</td><td><code>~/NcWorks_SETTINGS/</code></td></tr>
+            <tr><td>*.tdd</td><td>工具データ設定（NCプログラムと同じディレクトリ）</td><td>NCプログラムと同じ場所</td></tr>
+            <tr><td>*.mdd</td><td>材料径データ（NCプログラムと同じディレクトリ）</td><td>NCプログラムと同じ場所</td></tr>
+        </table>
+    </div>
+
+    <h3 id="settings-sim">シミュレーター設定（SETTINGS_SIM.ini）</h3>
+    <div class="card">
+        <p>各パラメータは改行区切りで保存されます：</p>
+        <table>
+            <tr><th>行番号</th><th>パラメータ</th><th>説明</th></tr>
+            <tr><td>1</td><td>材料径</td><td>材料の半径値（負の値で保存）</td></tr>
+            <tr><td>2</td><td>表示モード</td><td>1=両側表示, 2=片側表示</td></tr>
+            <tr><td>3</td><td>軌跡表示</td><td>1=個別表示, 2=全表示, 3=非表示</td></tr>
+            <tr><td>4</td><td>プログラム表示</td><td>1=個別表示, 2=全表示, 3=非表示</td></tr>
+            <tr><td>5</td><td>フォントサイズ</td><td>1=最小, 2=小, 3=中, 4=大, 5=最大</td></tr>
+            <tr><td>6</td><td>実行速度</td><td>1=x1, 2=x2, 3=x4, 4=x8, 5=x16, 6=フル</td></tr>
+            <tr><td>7</td><td>G50有効</td><td>0=無効, 1=有効</td></tr>
+            <tr><td>8以降</td><td>表示オプション</td><td>各種表示フラグ（0=OFF, 1=ON）</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== 内部API ===== -->
+    <h2 id="api">内部APIリファレンス</h2>
+
+    <h3 id="api-functions">主要関数一覧</h3>
+
+    <h4>Sub_NcTools.py — NCプログラム解析モジュール</h4>
+    <div class="card">
+        <table>
+            <tr><th>関数</th><th>説明</th></tr>
+            <tr><td><code>NC_SPLITTER(text)</code></td><td>NCプログラムテキストをコマンドと値の配列に分割</td></tr>
+            <tr><td><code>NC_PROGRAM_TEXT(prog)</code></td><td>配列化されたNCプログラムをテキストに戻す</td></tr>
+            <tr><td><code>NC_MOVEMENT(prog, g50)</code></td><td>配列化されたデータから移動データを抽出（工具別・行別）</td></tr>
+            <tr><td><code>NC_SIMPLE_PATH(data, ...)</code></td><td>移動データをシンプルな工具軌跡パスに変換</td></tr>
+            <tr><td><code>NC_PATH(data, ...)</code></td><td>移動データを工具別・移動別のパスに詳細変換</td></tr>
+            <tr><td><code>NC_REALTIME_MOVEMENT(data)</code></td><td>リアルタイムシミュレーション用の細粒度移動データを生成</td></tr>
+            <tr><td><code>NC_REALTIME_MOVEMENT_G0_1(...)</code></td><td>直線移動の中間座標を計算</td></tr>
+            <tr><td><code>NC_REALTIME_MOVEMENT_G2_3(...)</code></td><td>円弧移動の中間座標を計算</td></tr>
+            <tr><td><code>NC_REALTIME_PATH(data)</code></td><td>リアルタイム移動データをパスに変換</td></tr>
+            <tr><td><code>PROGRAM_TO_DXF(data, ...)</code></td><td>NCプログラムをDXFファイルとして出力</td></tr>
+            <tr><td><code>CONVERT_CLOSED_DXF(path, ...)</code></td><td>DXFファイルから閉じた工具形状パスを取得</td></tr>
+            <tr><td><code>CONVERT_G98_TO_G99(s, f)</code></td><td>分送り（G98）を回転送り（G99）に変換</td></tr>
+            <tr><td><code>CONVERT_G99_TO_G98(s, f)</code></td><td>回転送り（G99）を分送り（G98）に変換</td></tr>
+            <tr><td><code>DXF_TO_NC(...)</code></td><td>DXFファイルの工具軌跡をNCプログラムに変換</td></tr>
+        </table>
+    </div>
+
+    <h4>Sub_MathPlus.py — 数学演算モジュール</h4>
+    <div class="card">
+        <table>
+            <tr><th>関数</th><th>説明</th></tr>
+            <tr><td><code>RND(value)</code></td><td>小数点3桁に丸め（正負方向に0.001単位）</td></tr>
+            <tr><td><code>RND_2(value)</code></td><td>小数点4桁に丸め（正負方向に0.0001単位）</td></tr>
+            <tr><td><code>GET_POS_ON_ARC(cx, cy, a1, a2, r)</code></td><td>円の中心と角度から円上の始点・終点を取得</td></tr>
+            <tr><td><code>ROTATION_DIRECTION_DETECTOR(...)</code></td><td>始点・終点・中心からG2/G3の回転方向を判定</td></tr>
+            <tr><td><code>INTERSECTION_DETECTOR(...)</code></td><td>2直線の交差判定</td></tr>
+            <tr><td><code>GET_CROSS_POINT(...)</code></td><td>2直線の交点座標を計算</td></tr>
+            <tr><td><code>R_CENTER_DEGREE(...)</code></td><td>2点と半径から円の中心と角度を算出</td></tr>
+            <tr><td><code>R_CENTER_DEGREE2(...)</code></td><td>同上（QPainterPath用規格）</td></tr>
+            <tr><td><code>R_POSITION(cx, cy, r, deg)</code></td><td>円の中心・半径・角度から円上の座標を算出</td></tr>
+            <tr><td><code>CALCULATE_DEGREE(x, z)</code></td><td>2辺の長さから角度を計算</td></tr>
+            <tr><td><code>CALCULATE_Aa_c(a, deg)</code></td><td>辺と角度からもう一方の辺を計算</td></tr>
+            <tr><td><code>CALCULATE_Ac_a(c, deg)</code></td><td>辺と角度からもう一方の辺を計算</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== トラブルシューティング ===== -->
+    <h2 id="troubleshooting">トラブルシューティング</h2>
+
+    <div class="card">
+        <h4>シミュレーションでエラーが発生する</h4>
+        <ul>
+            <li><strong>原因:</strong> G02/G03でR値が指定されていない、またはF値が0</li>
+            <li><strong>解決:</strong> 円弧補間には必ずR値を、切削移動にはF値を指定してください</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>工具が表示されない</h4>
+        <ul>
+            <li><strong>原因:</strong> DXFファイルが正しくない、または工具が登録されていない</li>
+            <li><strong>解決:</strong> 工具リストでダブルクリックし、正しいDXFファイルを選択してください</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>シミュレーションがフリーズする</h4>
+        <ul>
+            <li><strong>原因:</strong> G98で送り値が小さすぎる（0.001未満）</li>
+            <li><strong>解決:</strong> システムは自動的に0.001に制限しますが、G99（回転送り）の使用を推奨します</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>DXF変換でデータが読み込まれない</h4>
+        <ul>
+            <li><strong>原因:</strong> レイヤーに開始点のCIRCLEがない、または線分が1本もない</li>
+            <li><strong>解決:</strong> 各レイヤーにCIRCLE（開始点）と1本以上の線分があることを確認してください</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>拡大しすぎるとエラーになる</h4>
+        <ul>
+            <li><strong>原因:</strong> オーバーフロー（V4.0.0で改善済み）</li>
+            <li><strong>解決:</strong> V5.0.0を使用してください</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>Nuitkaコンパイル版がウイルスとして検出される</h4>
+        <ul>
+            <li><strong>原因:</strong> Nuitkaでコンパイルされたexeファイルが誤検知される場合がある</li>
+            <li><strong>解決:</strong> セキュリティソフトに例外を追加して使用を許可してください</li>
+        </ul>
+    </div>
+
+    <!-- ===== ライセンス ===== -->
+    <h2 id="license">ライセンス</h2>
+    <div class="card">
+        <h4>NcWorks本体</h4>
+        <p><strong>MIT License</strong> — 配布、改変、商用利用等、全て自由です。</p>
+
+        <h4>使用ライブラリ</h4>
+        <table>
+            <tr><th>ライブラリ</th><th>ライセンス</th><th>利用条件</th></tr>
+            <tr><td>Python</td><td>PSF License</td><td>成果物の配布・改変・商用利用可</td></tr>
+            <tr><td>PySide6</td><td>LGPLv3</td><td>配布・商用利用可</td></tr>
+            <tr><td>ezdxf</td><td>MIT License</td><td>配布・改変・商用利用可</td></tr>
+            <tr><td>PyInstaller</td><td>BSD-3-Clause</td><td>成果物の配布・改変・商用利用可</td></tr>
+        </table>
+
+        <h4>謝辞</h4>
+        <ul>
+            <li>Python開発者 — <a href="https://www.python.org/">Python Software Foundation</a></li>
+            <li>GUIモジュール開発者 — <a href="https://www.qt.io/ja-jp/">The Qt Company</a></li>
+            <li>DXF処理モジュール開発者 — <a href="https://github.com/mozman">Manfred Moitzi</a></li>
+            <li>実行ファイル変換ソフト開発者 — <a href="https://github.com/pyinstaller">PyInstallerコミュニティ</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align: center; margin-top: 60px; padding: 20px; color: var(--text-light); font-size: 13px;">
+        <p>NcWorks V5.0.0 Manual</p>
+        <p>&copy; 2025 DAIKICHI-PSC | <a href="https://github.com/DAIKICHI-PSC/NcWorks">GitHub</a></p>
+    </div>
+
+</div>
+
+</body>
+</html>
